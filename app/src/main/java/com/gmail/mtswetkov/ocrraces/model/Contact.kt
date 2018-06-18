@@ -9,7 +9,7 @@ data class Contact (
         @NonNull @SerializedName("phone") val phone: String,
         @NonNull @SerializedName("shortDescription") val shortDescription: String,
         @NonNull @SerializedName("site") val site: String,
-        @NonNull @SerializedName("country") val country: List<Country>,
-        @NonNull @SerializedName("city") val city: List<City>,
+        @NonNull @SerializedName("country") val country: Country,
+        @NonNull @SerializedName("city") val city: City,
         @NonNull @SerializedName("socialNetworks") val socialNetworks: List<SocialNetwork>
 )

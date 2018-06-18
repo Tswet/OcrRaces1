@@ -6,7 +6,7 @@ import io.reactivex.Observable
 
 interface OcrApi {
 
-    @GET("/wps/wcm/connect/rosstat_ts/yar/ru/races2.json")
+    @GET("/wps/wcm/connect/rosstat_ts/yar/ru/races.json")
     fun getRaces() : Observable<RaceResponce>
 
 }
