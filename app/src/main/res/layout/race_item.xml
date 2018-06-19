@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -34,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/raceShortDescription"
+        android:id="@+id/raceDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -44,12 +43,12 @@
         app:layout_constraintTop_toBottomOf="@+id/raceName" />
 
     <TextView
-        android:id="@+id/raceDate"
+        android:id="@+id/raceShortDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/raceShortDescription"
-        app:layout_constraintStart_toStartOf="@+id/raceShortDescription"
-        app:layout_constraintTop_toBottomOf="@+id/raceShortDescription" />
+        app:layout_constraintEnd_toEndOf="@+id/raceDate"
+        app:layout_constraintStart_toStartOf="@+id/raceDate"
+        app:layout_constraintTop_toBottomOf="@+id/raceDate" />
 </android.support.constraint.ConstraintLayout>

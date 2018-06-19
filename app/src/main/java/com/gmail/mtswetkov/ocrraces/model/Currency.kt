@@ -2,10 +2,11 @@ package com.gmail.mtswetkov.ocrraces.model
 
 import android.support.annotation.NonNull
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-data class Currency (
-        @NonNull @SerializedName("id") val id: Int,
-        @NonNull @SerializedName("name") val Name: String,
-        @NonNull @SerializedName("engName") val engName: String,
-        @NonNull @SerializedName("code") val code: String
-)
+class Currency : Serializable {
+    @SerializedName("id") val id: Int = 0
+    @SerializedName("name") val Name: String = ""
+    @SerializedName("engName") val engName: String = ""
+    @SerializedName("code") val code: String = ""
+}

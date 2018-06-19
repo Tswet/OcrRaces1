@@ -1,10 +1,13 @@
 package com.gmail.mtswetkov.ocrraces.model
 
-import android.support.annotation.NonNull
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-data class Distance (
-        @NonNull @SerializedName("id") val id: Int,
-        @NonNull @SerializedName("value") val value: Double,
-        @NonNull @SerializedName("measure") val measure: Measure
-)
+class Distance :Serializable {
+    @SerializedName("id")
+    val id: Int = 0
+    @SerializedName("value")
+    val value: Double = 0.0
+    @SerializedName("measure")
+    val measure: Measure? = null
+}

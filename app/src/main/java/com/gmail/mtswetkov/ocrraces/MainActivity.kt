@@ -1,6 +1,6 @@
 package com.gmail.mtswetkov.ocrraces
 
-import android.content.Context
+
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
@@ -9,10 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.gmail.mtswetkov.ocrraces.model.OcrApi
 import com.gmail.mtswetkov.ocrraces.model.Race
-import com.gmail.mtswetkov.ocrraces.model.RaceItemClickListener
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -21,14 +19,12 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import android.content.Intent
-
-
+import java.time.format.DateTimeFormatter
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var raceAdapter : RaceAdapter
 
-    val SHOW_RACE = "SHOW_RACE"
     var singleRace : Race?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,9 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     inner class RaceAdapter : RecyclerView.Adapter<RaceAdapter.RaceViewHolder>() {
 
-
         private val races: MutableList<Race> = mutableListOf()
-        var context = applicationContext
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RaceViewHolder {
             return RaceViewHolder(layoutInflater.inflate(R.layout.race_item, parent, false))
@@ -87,9 +81,6 @@ class MainActivity : AppCompatActivity() {
             val raceShortDescription : TextView = itemView.findViewById(R.id.raceShortDescription)
             val raceDate : TextView = itemView.findViewById(R.id.raceDate)
             val raceIcon : ImageView = itemView.findViewById(R.id.raceIcon)
-            var raceItemClickListener : RaceItemClickListener?=null
-
-
             init {
                 itemView.setOnClickListener(this)
             }
@@ -97,34 +88,17 @@ class MainActivity : AppCompatActivity() {
             fun bindModel(race: Race) {
                 raceName.text = race.name
                 raceShortDescription.text = race.shortDescription
-                raceDate.text = race.date.toString()
+                raceDate.text = race.date.toString()//.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
                 Picasso.get().load(race.icon).into(raceIcon)
-                singleRace = race
-            }
-
-            fun SetOnItemClickListener(itemClickListener: RaceItemClickListener){
-                this.raceItemClickListener = itemClickListener
             }
 
             override fun onClick(v: View?) {
-                this.raceItemClickListener!!.onRaceItemClickListener(v!!, adapterPosition)
-                Toast.makeText(context, "Click", Toast.LENGTH_LONG).show()
+                var pos: Int = this.position
+                singleRace = races.get(pos)
                 val i = Intent(this@MainActivity, ShowSingleRaceActivity::class.java)
-                i.putExtra(SHOW_RACE, singleRace)
-                println("RACE"+singleRace!!.name)
-                //startActivity(i)
+                i.putExtra("SHOW_RACE", singleRace)
+                startActivity(i)
 
-                //this.raceItemClickListener!!.onRaceItemClickListener(v!!, adapterPosition)
-/*
-                holder.SetOnItemClickListener(object : RaceItemClickListener{
-                    override fun onRaceItemClickListener(view: View, pos: Int) {
-                        Toast.makeText(context, "Click", Toast.LENGTH_LONG).show()
-                        val i = Intent(this@MainActivity, ShowSingleRaceActivity::class.java)
-                        i.putExtra(SHOW_RACE, singleRace)
-                        println("RACE"+singleRace.toString())
-                        startActivity(i)
-                    }
-                })*/
             }
 
         }
