@@ -8,7 +8,7 @@ class Participation : Serializable {
     @SerializedName("id")
     val id: Int = 0
     @SerializedName("name")
-    val Name: String = ""
+    val name: String = ""
     @SerializedName("engName")
     val engName: String = ""
     @SerializedName("shortDescription")

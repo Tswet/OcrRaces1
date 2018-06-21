@@ -6,7 +6,7 @@ import java.io.Serializable
 
 class Currency : Serializable {
     @SerializedName("id") val id: Int = 0
-    @SerializedName("name") val Name: String = ""
+    @SerializedName("name") val name: String = ""
     @SerializedName("engName") val engName: String = ""
     @SerializedName("code") val code: String = ""
 }

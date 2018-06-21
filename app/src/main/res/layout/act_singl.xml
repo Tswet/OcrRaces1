@@ -1,0 +1,323 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/rImage"
+            android:layout_width="match_parent"
+            android:layout_height="183dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/ic_launcher"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="7dp" />
+
+        <ImageView
+            android:id="@+id/rIcon"
+            android:layout_width="86dp"
+            android:layout_height="82dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/rName"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/rName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="56dp"
+            android:text="TextView"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/rImage" />
+
+        <TextView
+            android:id="@+id/rDescLable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Описание"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/rName" />
+
+        <TextView
+            android:id="@+id/rDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rDescLable" />
+
+        <TextView
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/cardview_dark_background"
+            app:layout_constraintTop_toBottomOf="@+id/rDesc" />
+
+        <TextView
+            android:id="@+id/rPartLable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Формат участия"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+        <TextView
+            android:id="@+id/rPartOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Tesxt"
+            app:layout_constraintTop_toBottomOf="@+id/rPartLable" />
+
+        <TextView
+            android:id="@+id/rPartTeam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rPartOne" />
+
+        <TextView
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rPartTeam" />
+
+        <TextView
+            android:id="@+id/rDistLable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Дистанция"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+        <TextView
+            android:id="@+id/rDist1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rDistLable" />
+
+        <TextView
+            android:id="@+id/rDist2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rDist1" />
+
+        <TextView
+            android:id="@+id/rDist3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rDist2" />
+
+        <TextView
+            android:id="@+id/line3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rDist3" />
+
+        <TextView
+            android:id="@+id/rPriceLable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Стоимость участия"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/line3" />
+
+        <TextView
+            android:id="@+id/rPriceOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rPriceLable" />
+
+        <TextView
+            android:id="@+id/rPriceTeam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rPriceOne" />
+
+        <TextView
+            android:id="@+id/line4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rPriceTeam" />
+
+        <TextView
+            android:id="@+id/rContactsLable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Контакты"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/line4" />
+
+        <TextView
+            android:id="@+id/rContactsCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rContactsLable" />
+
+        <TextView
+            android:id="@+id/rContactsCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rContactsCountry" />
+
+        <TextView
+            android:id="@+id/rContactsSite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:autoLink="web"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rContactsCity" />
+
+        <TextView
+            android:id="@+id/rContactsEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:autoLink="email"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rContactsSite" />
+
+        <TextView
+            android:id="@+id/rContactsPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:autoLink="phone"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rContactsEmail" />
+
+        <TextView
+            android:id="@+id/line5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rContactsPhone" />
+
+        <TextView
+            android:id="@+id/rSocNetworkLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Социальные сети"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/line5" />
+
+        <TextView
+            android:id="@+id/rSnVK"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="VKontakte: VKontakte"
+            app:layout_constraintTop_toBottomOf="@+id/rSocNetworkLabel" />
+
+        <TextView
+            android:id="@+id/rSnFb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="FaceBook: FaceBook"
+            app:layout_constraintTop_toBottomOf="@+id/rSnVK" />
+
+        <TextView
+            android:id="@+id/rSnInst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Instagram: Instagram"
+            app:layout_constraintTop_toBottomOf="@+id/rSnFb" />
+
+        <TextView
+            android:id="@+id/rSnTele"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Telegram: Telegram"
+            app:layout_constraintTop_toBottomOf="@+id/rSnInst" />
+
+        <TextView
+            android:id="@+id/rSnYt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Telegram: Telegram"
+            app:layout_constraintTop_toBottomOf="@+id/rSnTele" />
+
+        <TextView
+            android:id="@+id/rSnTwt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Telegram: Telegram"
+            app:layout_constraintTop_toBottomOf="@+id/rSnYt" />
+
+
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
