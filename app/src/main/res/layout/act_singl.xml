@@ -317,6 +317,22 @@
             android:text="Telegram: Telegram"
             app:layout_constraintTop_toBottomOf="@+id/rSnYt" />
 
+        <TextView
+            android:id="@+id/line6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintTop_toBottomOf="@+id/rSnTwt" />
+
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            app:layout_constraintTop_toBottomOf="@+id/line6"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            tools:context=".ShowSingleRaceActivity" />
 
 
     </android.support.constraint.ConstraintLayout>

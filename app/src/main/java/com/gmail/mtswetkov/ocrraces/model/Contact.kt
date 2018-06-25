@@ -18,6 +18,9 @@ class Contact : Serializable {
     val country: Country? = null
     @SerializedName("city")
     val city: City? = null
+    @SerializedName("coordinate")
+    val coordinate: Coordinate? = null
     @SerializedName("socialNetworks")
     val socialNetworks: List<SocialNetwork>? = null
+
 }

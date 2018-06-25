@@ -11,8 +11,8 @@ class City : Serializable {
     val name: String = ""
     @SerializedName("engName")
     val engName: String = ""
-    @SerializedName("latitude")
+/*    @SerializedName("latitude")
     val latitude: String = ""
     @SerializedName("longitude")
-    val longitude: String = ""
+    val longitude: String = ""*/
 }

@@ -6,12 +6,23 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.gmail.mtswetkov.ocrraces.model.Race
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 
 
-class ShowSingleRaceActivity : AppCompatActivity () {
+class ShowSingleRaceActivity : AppCompatActivity (), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     var race: Race? = null
+    private lateinit var mMap: GoogleMap
+    private lateinit var fusedLocationClient : FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,5 +96,32 @@ class ShowSingleRaceActivity : AppCompatActivity () {
         Picasso.get().load(race!!.icon).transform(CircularTransformation(490)).into(raceIcon)
         Picasso.get().load(race!!.image).into(raceImage)
 
+        //Map Section
+        val mapFragment = supportFragmentManager
+                .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
     }
+
+    override fun onMapReady(p0: GoogleMap?) {
+
+        var raceLat = 0.0
+        if(race!!.contact!!.coordinate!!.latitude != ""){raceLat = race!!.contact!!.coordinate!!.latitude.toDouble()}
+        var raceLong = 0.0
+        if(race!!.contact!!.coordinate!!.longitude != ""){raceLong = race!!.contact!!.coordinate!!.longitude.toDouble()}
+        mMap = p0!!
+
+        println("Coordinates: " + race!!.contact!!.coordinate!!.longitude + " " + race!!.contact!!.coordinate!!.latitude )
+
+        val raceLocation = LatLng(raceLat, raceLong)
+        mMap?.addMarker(MarkerOptions().position(raceLocation).title("You race here"))
+        mMap?.moveCamera(CameraUpdateFactory.newLatLng(raceLocation))
+
+        mMap.getUiSettings().setZoomControlsEnabled(true)
+        mMap.setOnMarkerClickListener(this)
+    }
+
+    override fun onMarkerClick(p0: Marker?) = false
 }
+
