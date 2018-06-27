@@ -8,11 +8,11 @@ import java.time.LocalDateTime
 
 class Notification : Serializable {
     @SerializedName("id")
-    val id: Int = 0
+    var id: Int = 0
     @SerializedName("type")
-    val type: String = ""
+    var type: String = ""
     @SerializedName("date")
-    val date: String = ""
+    var date: String = ""
     @SerializedName("active")
-    val active: Boolean = false
+    var active: Boolean = false
 }

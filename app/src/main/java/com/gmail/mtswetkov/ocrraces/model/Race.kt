@@ -19,7 +19,7 @@ class Race() : Serializable {
     @SerializedName("shortDescription")
     val shortDescription: String = ""
     @SerializedName("favourite")
-    val favourite: Boolean = false
+    var favourite: Boolean = false
     @SerializedName("contact")
     val contact: Contact? = null
     @SerializedName("distances")
@@ -27,7 +27,7 @@ class Race() : Serializable {
     @SerializedName("prices")
     val prices: List<Price>? = null
     @SerializedName("notifications")
-    val notifications: List<Notification>? = null
+    var notifications: List<Notification>? = null
 }
 
 
