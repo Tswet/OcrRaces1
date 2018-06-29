@@ -7,12 +7,16 @@ import java.util.*
 import java.time.LocalDateTime
 
 class Notification : Serializable {
+    constructor(active: Boolean) {
+        this.active = active
+    }
+
     @SerializedName("id")
-    var id: Int = 0
+    val id: Int = 0
     @SerializedName("type")
-    var type: String = ""
+    val type: String = ""
     @SerializedName("date")
-    var date: String = ""
+    val date: String = ""
     @SerializedName("active")
     var active: Boolean = false
 }

@@ -4,11 +4,11 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import com.gmail.mtswetkov.ocrraces.R.drawable.yelstar
+import com.gmail.mtswetkov.ocrraces.model.LocalNotification
+import com.gmail.mtswetkov.ocrraces.model.Notification
 import com.gmail.mtswetkov.ocrraces.model.Race
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -22,8 +22,8 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.act_singl.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -32,10 +32,13 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     var favList: MutableList<Int> = mutableListOf(0)
+    var notifList: MutableList<LocalNotification> = mutableListOf(LocalNotification(0, Date(), "", ""))
     val PREFS_FILENAME = "com.gmail.mtswetkov.ocrracesfavoritRaceHrefs"
     val FAVORITS_RACE_ID = "FAVORITS_RACE_ID"
+    val NOTIFICATION_OBJECTS = "NOTIFICATION_OBJECTS"
     var prefs: SharedPreferences? = null
     val gson = Gson()
+    var notifActive: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,10 +78,23 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         prefs = this.getSharedPreferences(PREFS_FILENAME, 0)
         var jsonPerf: String = prefs!!.getString(FAVORITS_RACE_ID, "")
         if (jsonPerf != "") favList = gson.fromJson(jsonPerf, object : TypeToken<MutableList<Int>>() {}.type)
+        if(race!!.favourite == true)favoritBtn.setImageResource(R.drawable.yelstar)
         if (favList.contains(race!!.id)) {
             favoritBtn.setImageResource(R.drawable.yelstar)
             race!!.favourite = true
         }
+
+        //Notification section
+        jsonPerf = prefs!!.getString(NOTIFICATION_OBJECTS, "")
+        if (jsonPerf != "") notifList = gson.fromJson(jsonPerf, object : TypeToken<MutableList<LocalNotification>>() {}.type)
+        for (notif in notifList) {
+            if (notif.raceId == race!!.id) {
+                notifBtn.setImageResource(R.drawable.yelbell)
+                notifActive = true
+                break
+            }
+        }
+
         //Race format Section
 
         if (race!!.prices!!.get(0).participation!!.name != "") {
@@ -97,7 +113,6 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         rDistance3.text = race!!.distances!!.get(2).value.toString() + "+ " + race!!.distances!!.get(2).measure!!.name
 
         //Price Section
-
         rPriceOne.text = race!!.prices!!.get(0).amount.toString() + " " + race!!.prices!!.get(0).currency!!.name
         rPriceTeam.text = race!!.prices!!.get(1).amount.toString() + " " + race!!.prices!!.get(0).currency!!.name
 
@@ -143,18 +158,44 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
             editor.putString(FAVORITS_RACE_ID, jsonString)
             editor.apply()
         })
-        notifBtn.setOnClickListener(View.OnClickListener{
-            if (race!!.notifications != null) {
-                favoritBtn.setImageResource(R.drawable.yelbell)
-                var tDate: Date? = race!!.date
-                var date7: Date? = tDate
-                var date3: Date? = tDate
-                var date1: Date? = tDate
+        notifBtn.setOnClickListener(View.OnClickListener {
+            val temporaryDate: Date? = race!!.date
+            val dateForNotifInSevenDayBefore: Date? = Date(temporaryDate!!.getYear(), temporaryDate!!.getMonth(), (temporaryDate!!.getDay() - 7))
+            val dateForNotifInThreeDayBefore: Date? = Date(temporaryDate!!.getYear(), temporaryDate!!.getMonth(), (temporaryDate!!.getDay() - 3))
+            val dateForNotifInOneDayBefore: Date? = Date(temporaryDate!!.getYear(), temporaryDate!!.getMonth(), (temporaryDate!!.getDay() - 1))
+            println("Date" + dateForNotifInOneDayBefore + dateForNotifInSevenDayBefore)
+            if (notifActive == false) {
+                notifBtn.setImageResource(R.drawable.yelbell)
+                var NotifInSevenDayBefore = LocalNotification(race!!.id, dateForNotifInSevenDayBefore!!, "до гонки 7 дней", race!!.name )
+                var NotifInThreeDayBefore = LocalNotification(race!!.id, dateForNotifInThreeDayBefore!!,"до гонки 3 дня", race!!.name )
+                var NotifInOneDayBefore = LocalNotification(race!!.id, dateForNotifInOneDayBefore!!,"до гонки 1 день", race!!.name )
+                notifList.add(NotifInOneDayBefore)
+                notifList.add(NotifInThreeDayBefore)
+                notifList.add(NotifInSevenDayBefore)
+                notifActive = true
             } else {
-                favoritBtn.setImageResource(R.drawable.bell)
+                notifBtn.setImageResource(R.drawable.bell)
+                var deleteItems : ArrayList<Int> = ArrayList()
+                for (notif in notifList) {
+                    if (notif.raceId == race!!.id) deleteItems.add(notifList.indexOf(notif))
+                }
+                if(deleteItems[0]!=null)
+                {
+                    notifList.removeAt(deleteItems[2])
+                    notifList.removeAt(deleteItems[1])
+                    notifList.removeAt(deleteItems[0])
+                    deleteItems.clear()
+                }
+                notifActive = false
             }
+            val editor = prefs!!.edit()
+            var jsonString: String = gson.toJson(notifList)
+            println("NOTIF" + jsonString)
+            editor.putString(NOTIFICATION_OBJECTS, jsonString)
+            editor.apply()
+
         })
-        mailNotifBtn.setOnClickListener(View.OnClickListener{
+        mailNotifBtn.setOnClickListener(View.OnClickListener {
             mailNotifBtn.setImageResource(R.drawable.yelpostcard)
         })
 
@@ -184,6 +225,7 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
 
     override fun onMarkerClick(p0: Marker?) = false
 }
+
 
 
 

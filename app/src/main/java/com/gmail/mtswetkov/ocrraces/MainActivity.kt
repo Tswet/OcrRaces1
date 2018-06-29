@@ -98,9 +98,7 @@ class MainActivity : AppCompatActivity() {
                 val i = Intent(this@MainActivity, ShowSingleRaceActivity::class.java)
                 i.putExtra("SHOW_RACE", singleRace)
                 startActivity(i)
-
             }
-
         }
     }
 }
