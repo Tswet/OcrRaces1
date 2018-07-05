@@ -190,7 +190,6 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
             }
             val editor = prefs!!.edit()
             var jsonString: String = gson.toJson(notifList)
-            println("NOTIF" + jsonString)
             editor.putString(NOTIFICATION_OBJECTS, jsonString)
             editor.apply()
 
@@ -213,13 +212,12 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         }
         mMap = p0!!
 
-        println("Coordinates: " + race!!.contact!!.coordinate!!.longitude + " " + race!!.contact!!.coordinate!!.latitude)
-
         val raceLocation = LatLng(raceLat, raceLong)
-        mMap?.addMarker(MarkerOptions().position(raceLocation).title("You race here"))
-        mMap?.moveCamera(CameraUpdateFactory.newLatLng(raceLocation))
-
-        mMap.getUiSettings().setZoomControlsEnabled(true)
+        mMap.addMarker(MarkerOptions().position(raceLocation).title("Your race here"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(raceLocation))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(raceLocation, 12.0f))
+        mMap.uiSettings?.isZoomControlsEnabled = true
+        mMap.uiSettings?.isScrollGesturesEnabled = true
         mMap.setOnMarkerClickListener(this)
     }
 

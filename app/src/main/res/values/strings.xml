@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Ocr Races</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDg-RPM3-xvpCTGkjvlaHIySWq7kRtwUg0</string>
+    <string name="notification_channel_description">later</string>
 </resources>
