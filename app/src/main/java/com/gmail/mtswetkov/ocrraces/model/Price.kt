@@ -1,6 +1,5 @@
 package com.gmail.mtswetkov.ocrraces.model
 
-import android.support.annotation.NonNull
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -11,6 +10,8 @@ class Price : Serializable {
     val amount: Double = 0.0
     @SerializedName("currency")
     val currency: Currency? = null
-    @SerializedName("participation")
-    val participation: Participation? = null
+    @SerializedName("participationFormat")
+    val participationFormat: participationFormat? = null
+    @SerializedName("shortDescription")
+    val shortDescription: String = ""
 }

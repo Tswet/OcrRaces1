@@ -6,6 +6,10 @@ import java.io.Serializable
 class Contact : Serializable {
     @SerializedName("id")
     val id: Int = 0
+    @SerializedName("name")
+    val name : String =""
+    @SerializedName("address")
+    val address : String = ""
     @SerializedName("email")
     val email: String = ""
     @SerializedName("phone")

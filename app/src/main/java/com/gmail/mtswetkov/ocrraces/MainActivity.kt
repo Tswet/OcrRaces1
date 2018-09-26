@@ -1,104 +1,260 @@
 package com.gmail.mtswetkov.ocrraces
 
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.RecyclerView
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import com.gmail.mtswetkov.ocrraces.model.OcrApi
-import com.gmail.mtswetkov.ocrraces.model.Race
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.support.v4.widget.SwipeRefreshLayout
+import android.text.format.DateFormat.*
+import android.view.*
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import com.gmail.mtswetkov.ocrraces.btnAction.FavoritBtnClick
+import com.gmail.mtswetkov.ocrraces.btnAction.MailNotificationBtnClic
+import com.gmail.mtswetkov.ocrraces.btnAction.NotificationBtnClick
+import com.gmail.mtswetkov.ocrraces.model.*
+import com.google.gson.Gson
 
 
+class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var raceAdapter : RaceAdapter
+    private lateinit var itemAdapter: EventAdapter
+    private var events: MutableList<Event> = mutableListOf()
+    private var eventsSelectedList: MutableList<Event> = mutableListOf()
+    lateinit var singleEvent: Event
+    private val repository = SearchRepositoryProvider.provideSearchRepository()
+    private var userMail: String = ""
 
-    var singleRace : Race?=null
+
+    companion object {
+        const val selected_list = "Selected_List"
+        const val all_events = "ALL_EVENTS"
+    }
+
+    override fun onRefresh() {
+        events.clear()
+        getDataDespatcher()
+        btnPicReplacer()
+        itemAdapter.notifyDataSetChanged()
+        ma_swipe.isRefreshing = false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        btnPicReplacer()
+        itemAdapter.notifyDataSetChanged()
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        raceAdapter = RaceAdapter()
+        ma_swipe.setOnRefreshListener(this)
+
+        itemAdapter = EventAdapter()
         race_list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        race_list.adapter = raceAdapter
-
-
-        val retrofit : Retrofit = Retrofit.Builder()
-                .baseUrl("http://yar.gks.ru")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
-
-        val ocrApi = retrofit.create(OcrApi::class.java)
-
-        ocrApi.getRaces()
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ raceAdapter.setRaces(it.item)},
-                        {
-                            println("test_error" + it.message)
-                        })
+        race_list.adapter = itemAdapter
+        getDataDespatcher()
     }
 
-    inner class RaceAdapter : RecyclerView.Adapter<RaceAdapter.RaceViewHolder>() {
+    private fun getDataFromServer() {
+        repository.getEvent("iQQnMEX22LPn5Ipy4Rxx83zs5", 1)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    itemAdapter.setEvents(it)
+                    SharedPrefWorker(this).setAllEventsList(events)
+                }, {
+                    println("Error++ " + it.message)
+                })
+    }
 
-        private val races: MutableList<Race> = mutableListOf()
+    private fun getDataDespatcher() {
+        val cm = baseContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val netInfo = cm.activeNetworkInfo
+        if (netInfo != null && netInfo.isConnected) {
+            getDataFromServer()
+        } else {
+            events = SharedPrefWorker(this).getAllEventsList()
+            if (events.size > 0) {
+                itemAdapter.notifyDataSetChanged()
+            } else {
+                Toast.makeText(this, getString(R.string.noInternet), Toast.LENGTH_LONG).show()
+            }
+        }
+    }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RaceViewHolder {
-            return RaceViewHolder(layoutInflater.inflate(R.layout.race_item, parent, false))
+    inner class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
+
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
+            return EventViewHolder(layoutInflater.inflate(R.layout.race_item, parent, false))
         }
 
         override fun getItemCount(): Int {
-            return races.size
+            return events.size
         }
 
-        override fun onBindViewHolder(holder: RaceViewHolder, position: Int) {
-            holder.bindModel(races[position])
+        override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+            holder.bindModel(events[position])
         }
 
-        fun setRaces(item: List<Race>) {
-            races.addAll(item)
+        fun setEvents(item: List<Event>) {
+            events.addAll(item)
             notifyDataSetChanged()
         }
 
-        inner class RaceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-            val raceName : TextView = itemView.findViewById(R.id.raceName)
-            val raceShortDescription : TextView = itemView.findViewById(R.id.raceShortDescription)
-            val raceDate : TextView = itemView.findViewById(R.id.raceDate)
-            val raceIcon : ImageView = itemView.findViewById(R.id.raceIcon)
+            val eventImage: ImageView? = itemView.findViewById(R.id.eventImage)
+            val eventIcon: ImageView? = itemView.findViewById(R.id.eventIcon)
+            val eventName: TextView? = itemView.findViewById(R.id.eventName)
+            val eventShortDescription: TextView? = itemView.findViewById(R.id.eventShortDescription)
+            val eventDay: TextView? = itemView.findViewById(R.id.eventDay)
+            val eventMounth: TextView? = itemView.findViewById(R.id.eventMounth)
+            val eventLocation: TextView? = itemView.findViewById(R.id.eventLocation)
+            val favoritBtnMA: ImageButton? = itemView.findViewById(R.id.favoritBtnMA)
+            val notifBtnMA: ImageButton? = itemView.findViewById(R.id.notifBtnMA)
+            val mailNotifBtnMA: ImageButton? = itemView.findViewById(R.id.mailNotifBtnMA)
+            private var favoritList: MutableList<Int> = mutableListOf(0)
+            private var notifList: MutableList<LocalNotification> = mutableListOf()
+            private var subList: MutableList<Subscribe> = mutableListOf()
+
+
             init {
                 itemView.setOnClickListener(this)
             }
 
-            fun bindModel(race: Race) {
-                raceName.text = race.name
-                raceShortDescription.text = race.shortDescription
-                raceDate.text = race.date.toString()//.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                Picasso.get().load(race.icon).into(raceIcon)
+            fun bindModel(event: Event) {
+                eventName?.text = event.name
+                eventShortDescription?.text = event.shortDescription
+                val day = format("d", event.date)
+                val mounth = format("MMM", event.date)
+                eventDay?.text = day.toString()
+                eventMounth?.text = mounth
+                eventLocation?.text = getString(R.string.event_location, event.contact!!.country!!.name, event.contact.city!!.name)//"${event.contact!!.country!!.name} - ${event.contact.city!!.name}"
+                //Picasso.get().load(event.icon).into(eventIcon)
+                Picasso.get().load(event.icon).resize(400, 400).transform(CircularTransformation(200)).into(eventIcon)
+                Picasso.get().load(event.image).error(getDrawable(R.drawable.opanki)).into(eventImage)
+                btnPicReplacer()
+                if (event.favourite) {
+                    favoritBtnMA?.setImageResource(R.drawable.starrsm)
+                } else {
+                    favoritBtnMA?.setImageResource(R.drawable.starsm)
+                }
+                if (event.notifications) {
+                    notifBtnMA?.setImageResource(R.drawable.bellrsm)
+                } else {
+                    notifBtnMA?.setImageResource(R.drawable.bellsm)
+                }
+                if (event.signed) {
+                    mailNotifBtnMA?.setImageResource(R.drawable.emailrsm)
+                } else {
+                    mailNotifBtnMA?.setImageResource(R.drawable.emailsm)
+                }
+
+                favoritBtnMA?.setOnClickListener {
+                    favoritList = SharedPrefWorker(this@MainActivity).getFavoritrList()
+                    FavoritBtnClick().click(event, favoritBtnMA, this@MainActivity, favoritList, 1)
+                }
+                notifBtnMA?.setOnClickListener {
+                    notifList = SharedPrefWorker(this@MainActivity).getNotificationList()
+                    NotificationBtnClick().click(event, notifBtnMA, this@MainActivity, notifList, 1)
+                }
+
+                mailNotifBtnMA?.setOnClickListener {
+                    subList = SharedPrefWorker(this@MainActivity).getSubscribeList()
+                    MailNotificationBtnClic().click(event, mailNotifBtnMA, userMail, this@MainActivity, subList, 1)
+                }
             }
 
             override fun onClick(v: View?) {
-                var pos: Int = this.position
-                singleRace = races.get(pos)
+                val pos: Int = this.layoutPosition //this.position
+                singleEvent = events[pos]
                 val i = Intent(this@MainActivity, ShowSingleRaceActivity::class.java)
-                i.putExtra("SHOW_RACE", singleRace)
+                i.putExtra("SHOW_RACE", singleEvent)
                 startActivity(i)
             }
         }
     }
+
+    //_________________Button Section______________________________________________
+    //FAVORIT BUTTON Action
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.activity_main_drawer, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.favoriteMenu ->
+                eventsSelectedList = EventListSelector().select(true, false, false, events)
+
+            R.id.notificationMenu ->
+                eventsSelectedList = EventListSelector().select(false, true, false, events)
+
+            R.id.mailMenu ->
+                eventsSelectedList = EventListSelector().select(false, false, true, events)
+
+            R.id.extMenu -> {
+            }
+
+            R.id.calendarMenu -> {
+                val i = Intent(this, CalendarActivity::class.java)
+                startActivity(i)
+            }
+
+        }
+        if (eventsSelectedList.size != 0) {
+            val i = Intent(this@MainActivity, SearchActivity::class.java)
+            val jsonString = Gson().toJson(eventsSelectedList)
+            i.putExtra("Selected_List", jsonString)
+            startActivity(i)
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    fun btnPicReplacer() {
+        val spW = SharedPrefWorker(this)
+        val fl = spW.getFavoritrList()
+        for (event in events) {
+            event.favourite = fl.contains(event.id)
+        }
+        val nl = spW.getNotificationList()
+        for (event in events) {
+            event.notifications = false
+            for (item in nl) {
+                if (event.id == item.raceId) event.notifications = true
+
+            }
+        }
+        val ml = spW.getSubscribeList()
+        for (event in events) {
+            event.signed = false
+            for (item in ml) {
+                if (event.id == item.id) {
+                    event.signed = true
+                    userMail = item.email
+                }
+            }
+        }
+    }
+
 }
+

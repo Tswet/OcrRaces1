@@ -11,6 +11,7 @@ class LocalNotification : Serializable {
         this.message = message
         this.raceName = raceName
     }
+    constructor(){}
 
     @SerializedName("raceId")
     var raceId: Int = 0

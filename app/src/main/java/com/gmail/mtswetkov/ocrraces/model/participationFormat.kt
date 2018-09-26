@@ -4,7 +4,7 @@ import android.support.annotation.NonNull
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-class Participation : Serializable {
+class participationFormat : Serializable {
     @SerializedName("id")
     val id: Int = 0
     @SerializedName("name")

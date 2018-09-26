@@ -12,7 +12,7 @@ import com.squareup.picasso.Transformation;
 
 public class CircularTransformation implements Transformation {
 
-    private int mRadius = 10;
+    private int mRadius;
 
     public CircularTransformation(final int radius) {
         this.mRadius = radius;

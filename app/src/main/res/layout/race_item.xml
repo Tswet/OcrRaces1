@@ -1,55 +1,140 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <ImageView
-        android:id="@+id/raceIcon"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
+        android:id="@+id/eventIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:layout_constraintVertical_bias="0.061"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:contentDescription="@string/event_picture" />
 
     <TextView
-        android:id="@+id/raceName"
+        android:id="@+id/eventName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="50dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:layout_marginTop="22dp"
+        android:text="Race Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/raceIcon"
+        app:layout_constraintStart_toEndOf="@+id/eventIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/raceDate"
+        android:id="@+id/eventDay"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/raceName"
-        app:layout_constraintStart_toStartOf="@+id/raceName"
-        app:layout_constraintTop_toBottomOf="@+id/raceName" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="22dp"
+        android:gravity="end"
+        android:text="25"
+        android:textStyle="bold"
+        android:textColor="@color/darckRed"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/eventName"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/raceShortDescription"
+        android:id="@+id/eventLocation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
+        android:text="Race Location"
+        app:layout_constraintStart_toStartOf="@+id/eventName"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+    <TextView
+        android:id="@+id/eventMounth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="end"
+        android:text="Дек"
+        android:textColor="@color/darckRed"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintTop_toBottomOf="@+id/eventDay" />
+
+    <ImageView
+        android:id="@+id/eventImage"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@+id/eventIcon"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/eventShortDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/raceDate"
-        app:layout_constraintStart_toStartOf="@+id/raceDate"
-        app:layout_constraintTop_toBottomOf="@+id/raceDate" />
+        android:maxLines="4"
+        android:minLines="1"
+        app:layout_constraintTop_toBottomOf="@+id/eventImage" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/viewSpase"
+        android:layout_height="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/eventShortDescription"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/btmLayout"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/viewSpase">
+
+        <ImageButton
+            android:id="@+id/favoritBtnMA"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/starsm" />
+
+        <ImageButton
+            android:id="@+id/notifBtnMA"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/bellsm"/>
+
+        <ImageButton
+            android:id="@+id/mailNotifBtnMA"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/emailsm"/>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/viewSpase2"
+        android:layout_height="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/btmLayout"/>
 </android.support.constraint.ConstraintLayout>
