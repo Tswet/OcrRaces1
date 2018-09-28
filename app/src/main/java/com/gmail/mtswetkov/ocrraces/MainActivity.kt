@@ -211,6 +211,9 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                 eventsSelectedList = EventListSelector().select(false, false, true, events)
 
             R.id.extMenu -> {
+                SharedPrefWorker(this).setAllEventsList(events)
+                val i = Intent(this,ExtendedMenuActivity::class.java)
+                startActivity(i)
             }
 
             R.id.calendarMenu -> {

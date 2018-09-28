@@ -1,6 +1,7 @@
 package com.gmail.mtswetkov.ocrraces
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -21,12 +22,14 @@ import com.prolificinteractive.materialcalendarview.DayViewDecorator
 class CalendarActivity : AppCompatActivity() {
 
     private var events: MutableList<Event> = mutableListOf()
+    lateinit var event1: Event
+    lateinit var event2: Event
+    lateinit var event3: Event
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.calendar_activity)
         events = SharedPrefWorker(this).getAllEventsList()
-        Log.d("COLL_Int_____", events[1].favourite.toString())
         val eventColor = ContextCompat.getColor(this, R.color.lightBlue)
         val favEventColor = ContextCompat.getColor(this, R.color.lightGreen)
         val myFormat = "M-d-yyyy"
@@ -40,7 +43,7 @@ class CalendarActivity : AppCompatActivity() {
             val day = DateFormat.format("dd", e.date)
 
             cal1.set(year.toString().toInt(), month.toString().toInt() - 1, day.toString().toInt())
-            cal2.set(year.toString().toInt(), month.toString().toInt() - 1, day.toString().toInt(),22,59,1)
+            cal2.set(year.toString().toInt(), month.toString().toInt() - 1, day.toString().toInt(), 22, 59, 1)
             val setDays = getCalendarDaysSet(cal1, cal2)
             if (e.favourite) {
                 calendarView.addDecorators(EventDecorator(favEventColor, setDays))
@@ -60,27 +63,46 @@ class CalendarActivity : AppCompatActivity() {
                 var iter = 0
                 if (clcDate == sdf.format(e.date)) {
                     if (iter == 0) {
+                        event1 = e
                         Picasso.get().load(e.icon).resize(400, 400).transform(CircularTransformation(200)).into(icon_calendar_item1)
                         name_calendar_item1.text = e.name
                         city_calendar_item1.text = e.contact?.city?.name
                         race1_calendar.visibility = View.VISIBLE
+                        race1_calendar.setOnClickListener {
+                            eventOpener(this.city_calendar_item1, event1)
+                        }
                     }
                     if (iter == 1) {
+                        event2 = e
                         Picasso.get().load(e.icon).resize(400, 400).transform(CircularTransformation(200)).into(icon_calendar_item2)
                         name_calendar_item2.text = e.name
                         city_calendar_item2.text = e.contact?.city?.name
                         race1_calendar.visibility = View.VISIBLE
+                        race1_calendar.setOnClickListener {
+                            eventOpener(this.city_calendar_item1, event1)
+                        }
                     }
                     if (iter == 0) {
+                        event3 = e
                         Picasso.get().load(e.icon).resize(400, 400).transform(CircularTransformation(200)).into(icon_calendar_item3)
                         name_calendar_item3.text = e.name
                         city_calendar_item3.text = e.contact?.city?.name
                         race1_calendar.visibility = View.VISIBLE
+                        race1_calendar.setOnClickListener {
+                            eventOpener(this.city_calendar_item1, event1)
+                        }
                     }
                     iter++
                 }
             }
         }
+    }
+
+     fun eventOpener(v: View?, event: Event) {
+        val singleEvent = event
+        val i = Intent(this@CalendarActivity, ShowSingleRaceActivity::class.java)
+        i.putExtra("SHOW_RACE", singleEvent)
+        startActivity(i)
     }
 
 

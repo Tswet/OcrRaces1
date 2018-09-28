@@ -21,6 +21,7 @@
     <string name="priceTwo">%1$s %2$s. %3$s</string>
     <string name="country">%1$s</string>
     <string name="sity">%1$s</string>
+    <string name="sity_ru">Город</string>
     <string name="site">%1$s</string>
     <string name="email">%1$s</string>
     <string name="phone">%1$s</string>
