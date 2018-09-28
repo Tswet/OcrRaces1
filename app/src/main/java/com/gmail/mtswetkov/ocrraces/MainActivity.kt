@@ -144,7 +144,6 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                 eventDay?.text = day.toString()
                 eventMounth?.text = mounth
                 eventLocation?.text = getString(R.string.event_location, event.contact!!.country!!.name, event.contact.city!!.name)//"${event.contact!!.country!!.name} - ${event.contact.city!!.name}"
-                //Picasso.get().load(event.icon).into(eventIcon)
                 Picasso.get().load(event.icon).resize(400, 400).transform(CircularTransformation(200)).into(eventIcon)
                 Picasso.get().load(event.image).error(getDrawable(R.drawable.opanki)).into(eventImage)
                 btnPicReplacer()
@@ -215,6 +214,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             }
 
             R.id.calendarMenu -> {
+                SharedPrefWorker(this).setAllEventsList(events)
                 val i = Intent(this, CalendarActivity::class.java)
                 startActivity(i)
             }

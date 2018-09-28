@@ -44,4 +44,5 @@ dependencies {
     implementation 'com.android.support:palette-v7:27.1.1'
     implementation 'com.android.support:mediarouter-v7:27.1.1'
     implementation 'com.android.support.test:runner:1.0.2'
+    implementation 'com.prolificinteractive:material-calendarview:1.4.3'
 }

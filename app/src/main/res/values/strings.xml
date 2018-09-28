@@ -50,8 +50,10 @@
     <string name="event_contacts">Контакты</string>
     <string name="event_longitude">Долгота</string>
     <string name="event_latiitude">Широта</string>
-    <string name="no_info">Нет данных</string>
-    <string name="ext_menu">Дополнительно</string>
+    <string name="no_info">No info</string>
+    <string name="ext_menu">Extended Menu</string>
     <string name="calendar_menu">Calendar</string>
     <string name="date_fornat">%1$s-%2$s-%3$s</string>
+    <string name="event">Event</string>
+    <string name="fav_event">Favorite</string>
 </resources>
