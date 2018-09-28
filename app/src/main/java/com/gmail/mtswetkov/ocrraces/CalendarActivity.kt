@@ -1,12 +1,10 @@
 package com.gmail.mtswetkov.ocrraces
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.format.DateFormat
-import android.util.Log
 import android.view.View
 import com.gmail.mtswetkov.ocrraces.model.Event
 import com.gmail.mtswetkov.ocrraces.model.SharedPrefWorker
@@ -22,9 +20,9 @@ import com.prolificinteractive.materialcalendarview.DayViewDecorator
 class CalendarActivity : AppCompatActivity() {
 
     private var events: MutableList<Event> = mutableListOf()
-    lateinit var event1: Event
-    lateinit var event2: Event
-    lateinit var event3: Event
+    private lateinit var event1: Event
+    private lateinit var event2: Event
+    private lateinit var event3: Event
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +67,7 @@ class CalendarActivity : AppCompatActivity() {
                         city_calendar_item1.text = e.contact?.city?.name
                         race1_calendar.visibility = View.VISIBLE
                         race1_calendar.setOnClickListener {
-                            eventOpener(this.city_calendar_item1, event1)
+                            eventOpener(event1)
                         }
                     }
                     if (iter == 1) {
@@ -79,7 +77,7 @@ class CalendarActivity : AppCompatActivity() {
                         city_calendar_item2.text = e.contact?.city?.name
                         race1_calendar.visibility = View.VISIBLE
                         race1_calendar.setOnClickListener {
-                            eventOpener(this.city_calendar_item1, event1)
+                            eventOpener(event1)
                         }
                     }
                     if (iter == 0) {
@@ -89,7 +87,7 @@ class CalendarActivity : AppCompatActivity() {
                         city_calendar_item3.text = e.contact?.city?.name
                         race1_calendar.visibility = View.VISIBLE
                         race1_calendar.setOnClickListener {
-                            eventOpener(this.city_calendar_item1, event1)
+                            eventOpener(event1)
                         }
                     }
                     iter++
@@ -98,10 +96,9 @@ class CalendarActivity : AppCompatActivity() {
         }
     }
 
-     fun eventOpener(v: View?, event: Event) {
-        val singleEvent = event
+    private fun eventOpener(event: Event) {
         val i = Intent(this@CalendarActivity, ShowSingleRaceActivity::class.java)
-        i.putExtra("SHOW_RACE", singleEvent)
+        i.putExtra("SHOW_RACE", event)
         startActivity(i)
     }
 
