@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="10sp"
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:indeterminate="true"/>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/ma_swipe"
         android:layout_width="0dp"

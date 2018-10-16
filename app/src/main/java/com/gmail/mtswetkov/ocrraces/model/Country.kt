@@ -7,7 +7,7 @@ class Country : Serializable {
     @SerializedName("id")
     val id: Int = 0
     @SerializedName("name")
-    val site: String = ""
-    @SerializedName("engName")
     val name: String = ""
+    @SerializedName("engName")
+    val engName: String = ""
 }

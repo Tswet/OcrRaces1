@@ -5,6 +5,7 @@ import io.reactivex.Observable
 class SearchRepository(val apiService: OcrApi) {
 
     fun getEvent(token: String, dbVer: Int): Observable<List<Event>> {
+
         return  apiService.getEvents(token = token, dbVer = dbVer)
     }
 

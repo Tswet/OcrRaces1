@@ -9,6 +9,7 @@ import com.gmail.mtswetkov.ocrraces.model.Event
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
+import android.text.format.DateFormat
 import android.text.format.DateFormat.*
 import android.view.*
 import android.widget.ImageButton
@@ -36,6 +37,7 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         val b : Bundle = intent.extras
         val jsonString = b.getString(MainActivity.selected_list)
@@ -86,16 +88,13 @@ class SearchActivity : AppCompatActivity() {
             fun bindModel(event: Event) {
                 eventName?.text = event.name
                 eventShortDescription?.text = event.shortDescription
-                val day = format("dd", event.date)
-                val mounth = format("MMMM", event.date)
+                val day = format("d", event.date)
+                val mounth = DateFormat.format("MM", event.date)
                 eventDay?.text = day.toString()
-                eventMounth?.text = mounth//mounthRename(mounth.toString())
+                eventMounth?.text = MonthNameFormater().formater(mounth.toString().toInt()-1)
                 eventLocation?.text = getString(R.string.event_location, event.contact!!.country!!.name, event.contact.city!!.name)//"${event.contact!!.country!!.name} - ${event.contact.city!!.name}"
-                Picasso.get().load(event.icon).into(eventIcon)
+                Picasso.get().load(event.icon).resize(400, 400).transform(CircularTransformation(200)).into(eventIcon)
                 Picasso.get().load(event.image).error(getDrawable(R.drawable.opanki)).into(eventImage)
-                favoritList = SharedPrefWorker(this@SearchActivity).getFavoritrList()
-                notifList = SharedPrefWorker(this@SearchActivity).getNotificationList()
-                subList = SharedPrefWorker(this@SearchActivity).getSubscribeList()
                 btnPicReplacer()
                 if (event.favourite) {
                     favoritBtnMA?.setImageResource(R.drawable.starrsm)
@@ -113,17 +112,22 @@ class SearchActivity : AppCompatActivity() {
                     mailNotifBtnMA?.setImageResource(R.drawable.emailsm)
                 }
 
-                favoritBtnMA?.setOnClickListener{
-                    FavoritBtnClick().click(event, favoritBtnMA, this@SearchActivity, favoritList,1 )
+                favoritBtnMA?.setOnClickListener {
+                    favoritList = SharedPrefWorker(this@SearchActivity).getFavoritrList()
+                    FavoritBtnClick().click(event, favoritBtnMA, this@SearchActivity, favoritList, 1)
                 }
                 notifBtnMA?.setOnClickListener {
-                    NotificationBtnClick().click(event, notifBtnMA,this@SearchActivity, notifList, 1 )
+                    notifList = SharedPrefWorker(this@SearchActivity).getNotificationList()
+                    NotificationBtnClick().click(event, notifBtnMA, this@SearchActivity, notifList, 1)
                 }
 
                 mailNotifBtnMA?.setOnClickListener {
-                    MailNotificationBtnClic().click(event, mailNotifBtnMA, userMail, this@SearchActivity, subList,1 )
+                    subList = SharedPrefWorker(this@SearchActivity).getSubscribeList()
+                    MailNotificationBtnClic().click(event, mailNotifBtnMA, userMail, this@SearchActivity, subList, 1)
                 }
             }
+
+
 
             override fun onClick(v: View?) {
                 val pos: Int = this.layoutPosition
@@ -142,15 +146,20 @@ class SearchActivity : AppCompatActivity() {
             }
             val nl = spW.getNotificationList()
             for (event in events) {
+                event.notifications = false
                 for (item in nl) {
-                    event.notifications = item.raceId == event.id
+                    if (event.id == item.raceId) event.notifications = true
+
                 }
             }
             val ml = spW.getSubscribeList()
             for (event in events) {
+                event.signed = false
                 for (item in ml) {
-                    event.signed = item.id == event.id
-                    userMail = item.email
+                    if (event.id == item.id) {
+                        event.signed = true
+                        userMail = item.email
+                    }
                 }
             }
         }

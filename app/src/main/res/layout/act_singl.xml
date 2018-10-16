@@ -52,6 +52,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/rImage" />
 
             <TextView
+                android:id="@+id/rType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:textSize="17sp"
+                app:layout_constraintTop_toBottomOf="@+id/rName" />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="8sp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintTop_toBottomOf="@+id/rType" />
+
+            <TextView
                 android:id="@+id/rDescLable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +78,7 @@
                 android:textColor="@color/black"
                 android:textSize="19sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/rName" />
+                app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
             <TextView
                 android:id="@+id/rDesc"
@@ -83,7 +100,7 @@
                 android:id="@+id/rPartLable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8sp"
+                android:layout_marginStart="12sp"
                 android:layout_marginTop="8sp"
                 android:text="@string/format_participiaton"
                 android:textColor="@color/black"
@@ -95,11 +112,12 @@
                 android:id="@+id/rPartKids"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8sp"
+                android:layout_marginStart="12sp"
                 android:layout_marginTop="8sp"
                 android:text="@string/format_part_kids"
                 android:textColor="@color/black"
                 android:textSize="17sp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rPartLable" />
 
             <TextView
@@ -115,11 +133,12 @@
                 android:id="@+id/rPartOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8sp"
-                android:layout_marginTop="8sp"
                 android:text="@string/format_part_one"
                 android:textColor="@color/black"
+                android:layout_marginTop="8sp"
+                android:layout_marginStart="12sp"
                 android:textSize="17sp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rPartKidsDesc" />
 
             <TextView
@@ -135,13 +154,13 @@
                 android:id="@+id/rPartTeam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8sp"
+                android:layout_marginStart="12sp"
                 android:layout_marginTop="8sp"
                 android:text="@string/format_part_team"
                 android:textColor="@color/black"
                 android:textSize="17sp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rPartOneDesc" />
-
 
             <TextView
                 android:id="@+id/rPartTeamDesc"
@@ -156,12 +175,13 @@
                 android:id="@+id/rPartMass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8sp"
+                android:layout_marginStart="12sp"
                 android:layout_marginTop="8sp"
                 android:text="@string/format_part_mass"
                 android:textColor="@color/black"
                 android:textSize="17sp"
-                app:layout_constraintTop_toBottomOf="@+id/rPartTeamDesc" />
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPartTeamDesc"/>
 
 
             <TextView
@@ -177,11 +197,12 @@
                 android:id="@+id/rPartPair"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8sp"
+                android:layout_marginStart="12sp"
                 android:layout_marginTop="8sp"
                 android:text="@string/format_part_pair"
                 android:textColor="@color/black"
                 android:textSize="17sp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rPartMassDesc" />
 
 
@@ -198,11 +219,12 @@
                 android:id="@+id/rPartTeamChemp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8sp"
+                android:layout_marginStart="12sp"
                 android:layout_marginTop="8sp"
                 android:text="@string/format_part_team"
                 android:textColor="@color/black"
                 android:textSize="17sp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rPartPairDesc" />
 
 
@@ -215,6 +237,50 @@
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rPartTeamChemp" />
 
+            <TextView
+                android:id="@+id/rPartExtended"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPartTeamChempDesc" />
+
+
+            <TextView
+                android:id="@+id/rPartExtendedDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPartExtended" />
+
+            <TextView
+                android:id="@+id/rPartExtended2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPartExtendedDesc" />
+
+
+            <TextView
+                android:id="@+id/rPartExtended2Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPartExtended2" />
+
 
             <TextView
                 android:id="@+id/line2"
@@ -222,7 +288,7 @@
                 android:layout_height="1sp"
                 android:layout_marginTop="8sp"
                 android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@+id/rPartTeamChempDesc" />
+                app:layout_constraintTop_toBottomOf="@+id/rPartExtended2Desc" />
 
             <TextView
                 android:id="@+id/rDistLable"
@@ -267,12 +333,32 @@
                 app:layout_constraintTop_toBottomOf="@+id/rDist2" />
 
             <TextView
+                android:id="@+id/rDist4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                android:text="@string/no_info"
+                app:layout_constraintTop_toBottomOf="@+id/rDist3" />
+
+            <TextView
+                android:id="@+id/rDist5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                android:text="@string/no_info"
+                app:layout_constraintTop_toBottomOf="@+id/rDist4" />
+
+            <TextView
                 android:id="@+id/line3"
                 android:layout_width="match_parent"
                 android:layout_height="1sp"
                 android:layout_marginTop="8sp"
                 android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@+id/rDist3" />
+                app:layout_constraintTop_toBottomOf="@+id/rDist5" />
 
             <TextView
                 android:id="@+id/rPriceLable"
@@ -287,22 +373,80 @@
                 app:layout_constraintTop_toBottomOf="@+id/line3" />
 
             <TextView
-                android:id="@+id/rPriceOne"
+                android:id="@+id/rPrice1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
                 android:layout_marginTop="8sp"
                 android:text="@string/no_info"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rPriceLable" />
 
             <TextView
-                android:id="@+id/rPriceTeam"
+                android:id="@+id/rPrice2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
                 android:layout_marginTop="8sp"
                 android:text="@string/no_info"
-                app:layout_constraintTop_toBottomOf="@+id/rPriceOne" />
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice1" />
+
+            <TextView
+                android:id="@+id/rPrice3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice2" />
+
+            <TextView
+                android:id="@+id/rPrice4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice3" />
+            <TextView
+                android:id="@+id/rPrice5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice4" />
+            <TextView
+                android:id="@+id/rPrice6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice5" />
+            <TextView
+                android:id="@+id/rPrice7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice6" />
+            <TextView
+                android:id="@+id/rPrice8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice7" />
 
             <TextView
                 android:id="@+id/line4"
@@ -310,7 +454,7 @@
                 android:layout_height="1sp"
                 android:layout_marginTop="8sp"
                 android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@+id/rPriceTeam" />
+                app:layout_constraintTop_toBottomOf="@+id/rPrice8" />
 
             <TextView
                 android:id="@+id/rContactsLable"
@@ -327,72 +471,72 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginStart="8sp"
                 android:layout_marginTop="8sp"
                 android:id="@+id/eventContactHorizontalLayout"
                 app:layout_constraintTop_toBottomOf="@+id/rContactsLable">
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:orientation="horizontal">
                     <TextView
                         android:id="@+id/rContactsCountryLabel"
-                        android:layout_width="wrap_content"
+                        android:layout_width="80sp"
                         android:layout_height="wrap_content"
                         android:text="@string/Country" />
-                    <TextView
-                        android:id="@+id/rContactsCityLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/event_city_label" />
-                    <TextView
-                        android:id="@+id/rContactsAdressLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/event_adress_label" />
-                    <TextView
-                        android:id="@+id/rContactsSiteLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/event_site_label" />
-                    <TextView
-                        android:id="@+id/rContactsEmailLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/event_email_label" />
-                    <TextView
-                        android:id="@+id/rContactsPhoneLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/event_phone_label" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="7">
-
                     <TextView
                         android:id="@+id/rContactsCountry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/no_info" />
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/rContactsCityLabel"
+                        android:layout_width="80sp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/event_city_label" />
                     <TextView
                         android:id="@+id/rContactsCity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/no_info" />
 
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/rContactsAdressLabel"
+                        android:layout_width="80sp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/event_adress_label" />
                     <TextView
                         android:id="@+id/rContactsAdress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/no_info" />
 
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/rContactsSiteLabel"
+                        android:layout_width="80sp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/event_site_label" />
                     <TextView
                         android:id="@+id/rContactsSite"
                         android:layout_width="wrap_content"
@@ -400,12 +544,36 @@
                         android:text="@string/no_info"
                         android:autoLink="web"
                         android:ellipsize="end" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/rContactsEmailLabel"
+                        android:layout_width="80sp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/event_email_label" />
                     <TextView
                         android:id="@+id/rContactsEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/no_info"
                         android:autoLink="email" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/rContactsPhoneLabel"
+                        android:layout_width="80sp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/event_phone_label" />
                     <TextView
                         android:id="@+id/rContactsPhone"
                         android:layout_width="wrap_content"
@@ -413,6 +581,7 @@
                         android:text="@string/no_info"
                         android:autoLink="phone" />
                 </LinearLayout>
+
 
 
             </LinearLayout>
@@ -439,15 +608,15 @@
 
             <LinearLayout
                 android:id="@+id/socNetvLayout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/rSocNetworkLabel">
 
                 <TextView
                     android:id="@+id/rSnVK"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="42sp"
+                    android:layout_height="42sp"
                     android:layout_marginStart="8sp"
                     android:layout_marginTop="8dp"
                     android:autoLink="web"
@@ -457,8 +626,8 @@
 
                 <TextView
                     android:id="@+id/rSnFb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="42sp"
+                    android:layout_height="42sp"
                     android:layout_marginStart="8sp"
                     android:layout_marginTop="8dp"
                     android:autoLink="web"
@@ -468,8 +637,8 @@
 
                 <TextView
                     android:id="@+id/rSnInst"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="42sp"
+                    android:layout_height="42sp"
                     android:layout_marginStart="8sp"
                     android:layout_marginTop="8sp"
                     android:autoLink="web"
@@ -479,8 +648,8 @@
 
                 <TextView
                     android:id="@+id/rSnTele"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="42sp"
+                    android:layout_height="42sp"
                     android:layout_marginStart="8sp"
                     android:layout_marginTop="8sp"
                     android:autoLink="web"
@@ -490,8 +659,8 @@
 
                 <TextView
                     android:id="@+id/rSnYt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="42sp"
+                    android:layout_height="42sp"
                     android:layout_marginStart="8sp"
                     android:layout_marginTop="8sp"
                     android:autoLink="web"
@@ -501,8 +670,8 @@
 
                 <TextView
                     android:id="@+id/rSnTwt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="42sp"
+                    android:layout_height="42sp"
                     android:layout_marginStart="8sp"
                     android:layout_marginTop="8sp"
                     android:autoLink="web"
@@ -599,14 +768,14 @@
 
                 <ImageView
                     android:id="@+id/transparent_image"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/loc_label"
                     android:src="@color/transparent" />
 
                 <ImageButton
                     android:id="@+id/button"
-                    android:layout_width="150sp"
+                    android:layout_width="100sp"
                     android:layout_height="50sp"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentStart="true"
@@ -620,33 +789,37 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40sp"
-        android:orientation="horizontal">
+        android:layout_height="35sp"
+        android:orientation="horizontal"
+        android:background="@color/lightGray">
 
         <ImageButton
             android:id="@+id/favoritBtn"
             android:layout_width="40sp"
-            android:layout_height="40sp"
+            android:layout_height="32sp"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:paddingTop="3sp"
+            android:background="@color/lightGray"
             android:src="@drawable/star"
             android:contentDescription="@string/favorite_title" />
 
         <ImageButton
             android:id="@+id/notifBtn"
             android:layout_width="40sp"
-            android:layout_height="40sp"
+            android:layout_height="32sp"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:paddingTop="3sp"
+            android:background="@color/lightGray"
             android:src="@drawable/bell"
             android:contentDescription="@string/notification"/>
 
         <ImageButton
             android:id="@+id/mailNotifBtn"
             android:layout_width="40sp"
-            android:layout_height="40sp"
+            android:layout_height="32sp"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:paddingTop="3sp"
+            android:background="@color/lightGray"
             android:src="@drawable/email"
             android:contentDescription="@string/mail_notification"/>
     </LinearLayout>

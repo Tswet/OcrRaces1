@@ -3,9 +3,12 @@ package com.gmail.mtswetkov.ocrraces.btnAction
 import android.content.Context
 import android.support.v7.app.AlertDialog
 import android.text.InputType
-import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.Toast
+import com.gmail.mtswetkov.ocrraces.EmailValidator
 import com.gmail.mtswetkov.ocrraces.R
 import com.gmail.mtswetkov.ocrraces.ShowSingleRaceActivity
 import com.gmail.mtswetkov.ocrraces.model.Event
@@ -21,42 +24,54 @@ class MailNotificationBtnClic {
     private val repository = SearchRepositoryProvider.provideSearchRepository()
     private var userEmail = ""
 
-    fun click(event: Event, mailNotifBtn: ImageView, userEmailfromSP: String, context: Context, subsList: MutableList<Subscribe>, imageTipe : Int) {
+    fun click(event: Event, mailNotifBtn: ImageView, userEmailfromSP: String, context: Context, subsList: MutableList<Subscribe>, imageTipe: Int) {
         this.subscribeList = subsList
         if (!event.signed) {
             val builder = AlertDialog.Builder(context)
+            val dialLayout = LinearLayout(context)
             val input = EditText(context)
-            input.inputType = InputType.TYPE_CLASS_TEXT
+            input.setSingleLine()
+            input.width = 1800
+            input.hint = "email@domen.com"
+            dialLayout.addView(input)
+            dialLayout.setPadding(70, 0, 100, 0)
             builder.setTitle(R.string.mail_title)
-            builder.setView(input)
-            builder.setPositiveButton("OK") { _, _ ->  //dialog, wichButton
-                userEmail = input.text.toString()
-                repository.subscribe("iQQnMEX22LPn5Ipy4Rxx83zs5", userEmail, event.id)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe({
-                            event.signed = it
-                            when(imageTipe){
-                                1 -> mailNotifBtn.setImageResource(R.drawable.emailrsm)
-                                2 -> mailNotifBtn.setImageResource(R.drawable.emailr)
-                            }
-                            subscribeList.add(Subscribe(event.id, userEmail))
-                            SharedPrefWorker(context).setSubscrtibesList(subscribeList)
-                            ShowSingleRaceActivity.userEmail = userEmail
-                        }, {
-                            println("Error++ ")
-                        })
+            builder.setMessage(R.string.mail_dialog_message)
+            builder.setView(dialLayout)
+            builder.setPositiveButton("OK") { _, _ ->
+                //dialog, wichButton
+                if (EmailValidator.isEmailValid(input.text.toString())) {
+                    userEmail = input.text.toString()
+                    repository.subscribe("iQQnMEX22LPn5Ipy4Rxx83zs5", userEmail, event.id)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeOn(Schedulers.io())
+                            .subscribe({
+                                event.signed = it
+                                when (imageTipe) {
+                                    1 -> mailNotifBtn.setImageResource(R.drawable.emailrsm)
+                                    2 -> mailNotifBtn.setImageResource(R.drawable.emailr)
+                                }
+                                subscribeList.add(Subscribe(event.id, userEmail))
+                                SharedPrefWorker(context).setSubscrtibesList(subscribeList)
+                                ShowSingleRaceActivity.userEmail = userEmail
+                            }, {
+                                println("Error++ ")
+                            })
+                }else{
+                    Toast.makeText(context, "Введите корректный email", Toast.LENGTH_LONG).show()
+                }
             }
             builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() } //_ = which
             builder.create().show()
         } else {
-            if(userEmailfromSP != "")userEmail = userEmailfromSP
+            if (userEmailfromSP != "") userEmail = userEmailfromSP
+            Toast.makeText(context, userEmail, Toast.LENGTH_LONG).show()
             repository.unsubscribe("iQQnMEX22LPn5Ipy4Rxx83zs5", userEmail, event.id)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe({
                         event.signed = false
-                        when(imageTipe){
+                        when (imageTipe) {
                             1 -> mailNotifBtn.setImageResource(R.drawable.emailsm)
                             2 -> mailNotifBtn.setImageResource(R.drawable.email)
                         }

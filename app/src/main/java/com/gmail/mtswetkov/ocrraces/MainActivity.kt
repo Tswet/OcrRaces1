@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.support.v4.widget.SwipeRefreshLayout
+import android.text.format.DateFormat
 import android.text.format.DateFormat.*
 import android.view.*
 import android.widget.ImageButton
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onRefresh() {
         events.clear()
+        progress_bar.visibility = View.VISIBLE
         getDataDespatcher()
         btnPicReplacer()
         itemAdapter.notifyDataSetChanged()
@@ -75,6 +77,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                 .subscribe({
                     itemAdapter.setEvents(it)
                     SharedPrefWorker(this).setAllEventsList(events)
+                    progress_bar.visibility = View.GONE
                 }, {
                     println("Error++ " + it.message)
                 })
@@ -85,6 +88,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         val netInfo = cm.activeNetworkInfo
         if (netInfo != null && netInfo.isConnected) {
             getDataFromServer()
+            //while(events.size == 0) getDataFromServer()
         } else {
             events = SharedPrefWorker(this).getAllEventsList()
             if (events.size > 0) {
@@ -127,7 +131,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             val favoritBtnMA: ImageButton? = itemView.findViewById(R.id.favoritBtnMA)
             val notifBtnMA: ImageButton? = itemView.findViewById(R.id.notifBtnMA)
             val mailNotifBtnMA: ImageButton? = itemView.findViewById(R.id.mailNotifBtnMA)
-            private var favoritList: MutableList<Int> = mutableListOf(0)
+            private var favoritList: MutableList<Int> = mutableListOf()
             private var notifList: MutableList<LocalNotification> = mutableListOf()
             private var subList: MutableList<Subscribe> = mutableListOf()
 
@@ -140,9 +144,9 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                 eventName?.text = event.name
                 eventShortDescription?.text = event.shortDescription
                 val day = format("d", event.date)
-                val mounth = format("MMM", event.date)
+                val mounth = DateFormat.format("MM", event.date)
                 eventDay?.text = day.toString()
-                eventMounth?.text = mounth
+                eventMounth?.text = MonthNameFormater().formater(mounth.toString().toInt()-1)
                 eventLocation?.text = getString(R.string.event_location, event.contact!!.country!!.name, event.contact.city!!.name)//"${event.contact!!.country!!.name} - ${event.contact.city!!.name}"
                 Picasso.get().load(event.icon).resize(400, 400).transform(CircularTransformation(200)).into(eventIcon)
                 Picasso.get().load(event.image).error(getDrawable(R.drawable.opanki)).into(eventImage)
@@ -173,6 +177,14 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                 }
 
                 mailNotifBtnMA?.setOnClickListener {
+                    val ml = SharedPrefWorker(this@MainActivity).getSubscribeList()
+                    for (event in events) {
+                        for (item in ml) {
+                            if (event.id == item.id) {
+                                userMail = item.email
+                            }
+                        }
+                    }
                     subList = SharedPrefWorker(this@MainActivity).getSubscribeList()
                     MailNotificationBtnClic().click(event, mailNotifBtnMA, userMail, this@MainActivity, subList, 1)
                 }
@@ -187,10 +199,6 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             }
         }
     }
-
-    //_________________Button Section______________________________________________
-    //FAVORIT BUTTON Action
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
@@ -211,17 +219,17 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                 eventsSelectedList = EventListSelector().select(false, false, true, events)
 
             R.id.extMenu -> {
+                eventsSelectedList = mutableListOf()
                 SharedPrefWorker(this).setAllEventsList(events)
-                val i = Intent(this,ExtendedMenuActivity::class.java)
+                val i = Intent(this, ExtendedMenuActivity::class.java)
                 startActivity(i)
             }
-
             R.id.calendarMenu -> {
+                eventsSelectedList = mutableListOf()
                 SharedPrefWorker(this).setAllEventsList(events)
                 val i = Intent(this, CalendarActivity::class.java)
                 startActivity(i)
             }
-
         }
         if (eventsSelectedList.size != 0) {
             val i = Intent(this@MainActivity, SearchActivity::class.java)
