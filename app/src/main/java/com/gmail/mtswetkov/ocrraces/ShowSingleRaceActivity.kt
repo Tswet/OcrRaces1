@@ -27,12 +27,12 @@ import android.content.Intent
 import android.net.Uri
 import android.text.format.DateFormat
 import android.util.Log
-import java.text.SimpleDateFormat
+
 
 
 class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
-    private var event: Event? = null
+    private var event: Event = Event()
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var favList: MutableList<Int> = mutableListOf()
@@ -62,13 +62,13 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
 
         val eventShortDescription: TextView = findViewById(R.id.rDesc)
         event = intent.getSerializableExtra("SHOW_RACE") as Event
-        rName.text = event!!.name
-        rType.text = event!!.eventType!!.name
-        eventShortDescription.text = event!!.fullDescription
+        rName.text = event.name
+        rType.text = event.eventType!!.name
+        eventShortDescription.text = event.fullDescription
 
-        val day = DateFormat.format("d", event!!.date)
-        val year = DateFormat.format("yyyy", event!!.date)
-        val mounth = DateFormat.format("MM", event!!.date)
+        val day = DateFormat.format("d", event.date)
+        val year = DateFormat.format("yyyy", event.date)
+        val mounth = DateFormat.format("MM", event.date)
 
 
 
@@ -76,34 +76,42 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         val notifBtn: ImageButton = findViewById(R.id.notifBtn)
         val mailNotifBtn: ImageButton = findViewById(R.id.mailNotifBtn)
 
-        if (event!!.contact!!.coordinate!!.latitude != "") {
-            raceLat = event!!.contact!!.coordinate!!.latitude.toDouble()
+        val jsonString : String = gson.toJson(event.contact)
+        Log.d("events_LIST", jsonString)
+
+        if(event.contact?.coordinate == null)
+            event.contact?.coordinate = Coordinate()
+
+        Log.d("events_LIST",  event.contact?.coordinate.toString())
+
+
+        if (event.contact?.coordinate?.latitude != "" && event.contact?.coordinate?.latitude != null ) {
+            raceLat = event.contact!!.coordinate.latitude.toDouble()
         }
 
-        if (event!!.contact!!.coordinate!!.longitude != "") {
-            raceLong = event!!.contact!!.coordinate!!.longitude.toDouble()
+        if (event.contact?.coordinate?.longitude != "" && event.contact?.coordinate?.longitude != null ) {
+            raceLong = event.contact!!.coordinate.longitude.toDouble()
         }
 
 
         //Favorit section
         favList = SharedPrefWorker(this).getFavoritrList()
-        if (favList.contains(event!!.id)) {
+        if (favList.contains(event.id)) {
             favoritBtn.setImageResource(R.drawable.starr)
-            event!!.favourite = true
+            event.favourite = true
         }
 
         //Notification section
         notifList = SharedPrefWorker(this).getNotificationList()
         for (notif in notifList) {
-            if (notif.raceId == event!!.id) {
+            if (notif.raceId == event.id) {
                 notifBtn.setImageResource(R.drawable.bellr)
-                event!!.notifications = true
+                event.notifications = true
                 break
             }
         }
 
-        actTitle = getString(R.string.activity_title,event!!.name, day.toString(), MonthNameFormater().formaterText(mounth.toString().toInt()-1), year)
-        //Log.d("title_act", actTitle)
+        actTitle = getString(R.string.activity_title,event.name, day.toString(), MonthNameFormater().formaterText(mounth.toString().toInt()-1), year)
         this.supportActionBar?.title = actTitle
 
         //Mail Subscribe section
@@ -111,149 +119,149 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         eventLongitude.text = raceLong.toString()
         subscribeList = SharedPrefWorker(this).getSubscribeList()
         for (sub in subscribeList) {
-            if (sub.id == event!!.id) {
+            if (sub.id == event.id) {
                 mailNotifBtn.setImageResource(R.drawable.emailr)
                 userEmail = sub.email
-                event!!.signed = true
+                event.signed = true
             }
         }
 
         //Event format Section
-        val pfSiaze = event?.prices?.size
+        val pfSiaze = event.prices?.size
         if (pfSiaze!! > 0) {
-            if (event?.prices!!.get(0).participationFormat!!.name != "") {
-                rPartKids.setText(event?.prices!!.get(0).participationFormat!!.name)
+            if (event.prices!!.get(0).participationFormat!!.name != "") {
+                rPartKids.setText(event.prices!!.get(0).participationFormat!!.name)
                 rPartKids.visibility = View.VISIBLE
-                rPartKidsDesc.setText(event?.prices!!.get(0).participationFormat!!.shortDescription)
+                rPartKidsDesc.setText(event.prices!!.get(0).participationFormat!!.shortDescription)
                 rPartKidsDesc.visibility = View.VISIBLE
             }
         }
         if (pfSiaze > 1) {
-            if (event?.prices!!.get(1).participationFormat!!.name != "") {
-                rPartOne.setText(event?.prices!!.get(1).participationFormat!!.name)
+            if (event.prices!!.get(1).participationFormat!!.name != "") {
+                rPartOne.setText(event.prices!!.get(1).participationFormat!!.name)
                 rPartOne.visibility = View.VISIBLE
-                rPartOneDesc.setText(event?.prices!!.get(1).participationFormat!!.shortDescription)
+                rPartOneDesc.setText(event.prices!!.get(1).participationFormat!!.shortDescription)
                 rPartOneDesc.visibility = View.VISIBLE
             }
         }
         if (pfSiaze > 2) {
-            if (event?.prices!!.get(2).participationFormat!!.name != "") {
-                rPartTeam.setText(event?.prices!!.get(2).participationFormat!!.name)
+            if (event.prices!!.get(2).participationFormat!!.name != "") {
+                rPartTeam.setText(event.prices!!.get(2).participationFormat!!.name)
                 rPartTeam.visibility = View.VISIBLE
-                rPartTeamDesc.setText(event?.prices!!.get(2).participationFormat!!.shortDescription)
+                rPartTeamDesc.setText(event.prices!!.get(2).participationFormat!!.shortDescription)
                 rPartTeamDesc.visibility = View.VISIBLE
             }
         }
         if (pfSiaze > 3) {
-            if (event?.prices!!.get(3).participationFormat!!.name != "") {
-                rPartMass.setText(event?.prices!!.get(3).participationFormat!!.name)
+            if (event.prices!!.get(3).participationFormat!!.name != "") {
+                rPartMass.setText(event.prices!!.get(3).participationFormat!!.name)
                 rPartMass.visibility = View.VISIBLE
-                rPartMassDesc.setText(event?.prices!!.get(3).participationFormat!!.shortDescription)
+                rPartMassDesc.setText(event.prices!!.get(3).participationFormat!!.shortDescription)
                 rPartMassDesc.visibility = View.VISIBLE
             }
         }
         if (pfSiaze > 4) {
-            if (event?.prices!!.get(4).participationFormat!!.name != "") {
-                rPartPair.setText(event?.prices!!.get(4).participationFormat!!.name)
+            if (event.prices!!.get(4).participationFormat!!.name != "") {
+                rPartPair.setText(event.prices!!.get(4).participationFormat!!.name)
                 rPartPair.visibility = View.VISIBLE
-                rPartPairDesc.setText(event?.prices!!.get(4).participationFormat!!.shortDescription)
+                rPartPairDesc.setText(event.prices!!.get(4).participationFormat!!.shortDescription)
                 rPartPairDesc.visibility = View.VISIBLE
             }
         }
         if (pfSiaze > 5) {
-            if (event?.prices!!.get(5).participationFormat!!.name != "") {
-                rPartTeamChemp.setText(event?.prices!!.get(5).participationFormat!!.name)
+            if (event.prices!!.get(5).participationFormat!!.name != "") {
+                rPartTeamChemp.setText(event.prices!!.get(5).participationFormat!!.name)
                 rPartTeamChemp.visibility = View.VISIBLE
-                rPartTeamChempDesc.setText(event?.prices!!.get(5).participationFormat!!.shortDescription)
+                rPartTeamChempDesc.setText(event.prices!!.get(5).participationFormat!!.shortDescription)
                 rPartTeamChempDesc.visibility = View.VISIBLE
             }
         }
         if (pfSiaze > 6) {
-            if (event?.prices!!.get(6).participationFormat!!.name != "") {
-                rPartExtended.setText(event?.prices!!.get(6).participationFormat!!.name)
+            if (event.prices!!.get(6).participationFormat!!.name != "") {
+                rPartExtended.setText(event.prices!!.get(6).participationFormat!!.name)
                 rPartExtended.visibility = View.VISIBLE
-                rPartExtendedDesc.setText(event?.prices!!.get(6).participationFormat!!.shortDescription)
+                rPartExtendedDesc.setText(event.prices!!.get(6).participationFormat!!.shortDescription)
                 rPartExtendedDesc.visibility = View.VISIBLE
             }
         }
         if (pfSiaze > 7) {
-            if (event?.prices!!.get(7).participationFormat!!.name != "") {
-                rPartExtended2.setText(event?.prices!!.get(7).participationFormat!!.name)
+            if (event.prices!!.get(7).participationFormat!!.name != "") {
+                rPartExtended2.setText(event.prices!!.get(7).participationFormat!!.name)
                 rPartExtended2.visibility = View.VISIBLE
-                rPartExtended2Desc.setText(event?.prices!!.get(7).participationFormat!!.shortDescription)
+                rPartExtended2Desc.setText(event.prices!!.get(7).participationFormat!!.shortDescription)
                 rPartExtended2Desc.visibility = View.VISIBLE
             }
         }
 
 
         //Distance Section
-        val distListLenght = event!!.distances!!.size
+        val distListLenght = event.distances!!.size
         if (distListLenght > 0) {
-            rDist1?.setText(getString(R.string.raceDist1, event!!.distances!!.get(0).value.toInt().toString(), event!!.distances!!.get(0).measure!!.name))
+            rDist1?.setText(getString(R.string.raceDist1, event.distances!!.get(0).value.toInt().toString(), event.distances!!.get(0).measure!!.name))
             rDist1?.visibility = View.VISIBLE
         }
         if (distListLenght > 1) {
-            rDist2?.setText(getString(R.string.raceDist2, event!!.distances!!.get(1).value.toInt().toString(), event!!.distances!!.get(1).measure!!.name))
+            rDist2?.setText(getString(R.string.raceDist2, event.distances!!.get(1).value.toInt().toString(), event.distances!!.get(1).measure!!.name))
             rDist2?.visibility = View.VISIBLE
         }
         if (distListLenght > 2) {
-            rDist3?.setText(getString(R.string.raceDist3, event!!.distances!!.get(2).value.toInt().toString(), event!!.distances!!.get(2).measure!!.name))
+            rDist3?.setText(getString(R.string.raceDist3, event.distances!!.get(2).value.toInt().toString(), event.distances!!.get(2).measure!!.name))
             rDist3?.visibility = View.VISIBLE
         }
         if (distListLenght > 3) {
-            rDist4?.setText(getString(R.string.raceDist3, event!!.distances!!.get(3).value.toInt().toString(), event!!.distances!!.get(3).measure!!.name))
+            rDist4?.setText(getString(R.string.raceDist3, event.distances!!.get(3).value.toInt().toString(), event.distances!!.get(3).measure!!.name))
             rDist4?.visibility = View.VISIBLE
         }
         if (distListLenght > 4) {
-            rDist5?.setText(getString(R.string.raceDist3, event!!.distances!!.get(4).value.toInt().toString(), event!!.distances!!.get(4).measure!!.name))
+            rDist5?.setText(getString(R.string.raceDist3, event.distances!!.get(4).value.toInt().toString(), event.distances!!.get(4).measure!!.name))
             rDist5?.visibility = View.VISIBLE
         }
 
         //Price Section
-        val priceSize = event!!.prices!!.size
+        val priceSize = event.prices!!.size
         if (priceSize > 0) {
-            rPrice1?.text = getString(R.string.priceOne, event!!.prices!![0].amount.toInt().toString(), event!!.prices!![0].currency!!.name, event!!.prices!![0].participationFormat!!.name)
+            rPrice1?.text = getString(R.string.priceOne, event.prices!![0].amount.toInt().toString(), event.prices!![0].currency!!.name, event.prices!![0].participationFormat!!.name)
             rPrice1.visibility = View.VISIBLE
         }
         if (priceSize > 1) {
-            rPrice2?.text = getString(R.string.priceTwo, event!!.prices!!.get(1).amount.toInt().toString(), event!!.prices!!.get(1).currency!!.name, event!!.prices!![1].participationFormat!!.name)
+            rPrice2?.text = getString(R.string.priceTwo, event.prices!!.get(1).amount.toInt().toString(), event.prices!!.get(1).currency!!.name, event.prices!![1].participationFormat!!.name)
             rPrice2.visibility = View.VISIBLE
         }
         if (priceSize > 2) {
-            rPrice3?.text = getString(R.string.priceTwo, event!!.prices!!.get(2).amount.toInt().toString(), event!!.prices!!.get(2).currency!!.name, event!!.prices!![2].participationFormat!!.name)
+            rPrice3?.text = getString(R.string.priceTwo, event.prices!!.get(2).amount.toInt().toString(), event.prices!!.get(2).currency!!.name, event.prices!![2].participationFormat!!.name)
             rPrice3.visibility = View.VISIBLE
         }
         if (priceSize > 3) {
-            rPrice4?.text = getString(R.string.priceTwo, event!!.prices!!.get(3).amount.toInt().toString(), event!!.prices!!.get(3).currency!!.name, event!!.prices!![3].participationFormat!!.name)
+            rPrice4?.text = getString(R.string.priceTwo, event.prices!!.get(3).amount.toInt().toString(), event.prices!!.get(3).currency!!.name, event.prices!![3].participationFormat!!.name)
             rPrice4.visibility = View.VISIBLE
         }
         if (priceSize > 4) {
-            rPrice5?.text = getString(R.string.priceTwo, event!!.prices!!.get(4).amount.toInt().toString(), event!!.prices!!.get(4).currency!!.name, event!!.prices!![4].participationFormat!!.name)
+            rPrice5?.text = getString(R.string.priceTwo, event.prices!!.get(4).amount.toInt().toString(), event.prices!!.get(4).currency!!.name, event.prices!![4].participationFormat!!.name)
             rPrice5.visibility = View.VISIBLE
         }
         if (priceSize > 5) {
-            rPrice6?.text = getString(R.string.priceTwo, event!!.prices!!.get(5).amount.toInt().toString(), event!!.prices!!.get(5).currency!!.name, event!!.prices!![5].participationFormat!!.name)
+            rPrice6?.text = getString(R.string.priceTwo, event.prices!!.get(5).amount.toInt().toString(), event.prices!!.get(5).currency!!.name, event.prices!![5].participationFormat!!.name)
             rPrice6.visibility = View.VISIBLE
         }
         if (priceSize > 6) {
-            rPrice7?.text = getString(R.string.priceTwo, event!!.prices!!.get(6).amount.toInt().toString(), event!!.prices!!.get(6).currency!!.name, event!!.prices!![6].participationFormat!!.name)
+            rPrice7?.text = getString(R.string.priceTwo, event.prices!!.get(6).amount.toInt().toString(), event.prices!!.get(6).currency!!.name, event.prices!![6].participationFormat!!.name)
             rPrice7.visibility = View.VISIBLE
         }
         if (priceSize > 7) {
-            rPrice8?.text = getString(R.string.priceTwo, event!!.prices!!.get(7).amount.toInt().toString(), event!!.prices!!.get(7).currency!!.name, event!!.prices!![7].participationFormat!!.name)
+            rPrice8?.text = getString(R.string.priceTwo, event.prices!!.get(7).amount.toInt().toString(), event.prices!!.get(7).currency!!.name, event.prices!![7].participationFormat!!.name)
             rPrice8.visibility = View.VISIBLE
         }
 
         //Contact Section
-        if (event!!.contact!!.country!!.name != "") rContactsCountry?.setText(getString(R.string.country, event!!.contact!!.country!!.name))
-        if (event!!.contact!!.city!!.name != "") rContactsCity?.setText(getString(R.string.sity, event!!.contact!!.city!!.name))
-        if (event!!.contact!!.address != "") rContactsAdress?.setText(getString(R.string.address, event?.contact?.address))
-        if (event!!.contact!!.site != "") rContactsSite?.setText(getString(R.string.site, event!!.contact!!.site))
-        if (event!!.contact!!.email != "") rContactsEmail?.setText(getString(R.string.email, event!!.contact!!.email))
-        if (event!!.contact!!.phone != "") rContactsPhone?.setText(getString(R.string.phone, event!!.contact!!.phone))
+        if (event.contact!!.country!!.name != "") rContactsCountry?.setText(getString(R.string.country, event.contact!!.country!!.name))
+        if (event.contact!!.city!!.name != "") rContactsCity?.setText(getString(R.string.sity, event.contact!!.city!!.name))
+        if (event.contact!!.address != "") rContactsAdress?.setText(getString(R.string.address, event.contact?.address))
+        if (event.contact!!.site != "") rContactsSite?.setText(getString(R.string.site, event.contact!!.site))
+        if (event.contact!!.email != "") rContactsEmail?.setText(getString(R.string.email, event.contact!!.email))
+        if (event.contact!!.phone != "") rContactsPhone?.setText(getString(R.string.phone, event.contact!!.phone))
 
         //Social Network Section
-        val socNets = event!!.contact!!.socialNetworks
+        val socNets = event.contact!!.socialNetworks
         for (sn in socNets!!) {
             if (sn.type.equals(SocNameList.VKONTAKTE.toString())) {
                 rSnVK?.text = getString(R.string.vkName, sn.link)
@@ -288,8 +296,8 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         }
 
         //raceDate.text = events!!.date.toString()
-        Picasso.get().load(event!!.icon).resize(400, 400).transform(CircularTransformation(200)).into(rIcon)
-        Picasso.get().load(event!!.image).into(rImage)
+        Picasso.get().load(event.icon).resize(400, 400).transform(CircularTransformation(200)).into(rIcon)
+        Picasso.get().load(event.image).into(rImage)
 
         //Map Section
         val mapWrapper: ImageView = findViewById(R.id.transparent_image)
@@ -312,22 +320,22 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         })
 
         favoritBtn.setOnClickListener {
-            FavoritBtnClick().click(event!!, favoritBtn, this, favList, 2)
+            FavoritBtnClick().click(event, favoritBtn, this, favList, 2)
         }
 
         //Mail Subscribe BUTTON Action
         mailNotifBtn.setOnClickListener {
             //subscribeList = SharedPrefWorker(this).getSubscribeList(this)
-            MailNotificationBtnClic().click(event!!, mailNotifBtn, userEmail, this, subscribeList, 2)
+            MailNotificationBtnClic().click(event, mailNotifBtn, userEmail, this, subscribeList, 2)
         }
         //NOTIFICATION BUTTON Action
         notifBtn.setOnClickListener {
-            NotificationBtnClick().click(event!!, notifBtn, this, notifList, 2)
+            NotificationBtnClick().click(event, notifBtn, this, notifList, 2)
         }
     }
 
     fun googleMapsOpener(view: View) {
-        val yourLocationName = event?.name
+        val yourLocationName = event.name
         val strUri = "http://maps.google.com/maps?q=loc:$raceLat,$raceLong ($yourLocationName)"
         val intent = Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri))
         intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity")

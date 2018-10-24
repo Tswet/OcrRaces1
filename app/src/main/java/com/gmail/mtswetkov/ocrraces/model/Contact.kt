@@ -1,15 +1,18 @@
 package com.gmail.mtswetkov.ocrraces.model
 
+import android.support.annotation.NonNull
 import com.google.gson.annotations.SerializedName
+
 import java.io.Serializable
 
 class Contact : Serializable {
+
     @SerializedName("id")
     val id: Int = 0
     @SerializedName("name")
-    val name : String =""
+    val name: String = ""
     @SerializedName("address")
-    val address : String = ""
+    val address: String = ""
     @SerializedName("email")
     val email: String = ""
     @SerializedName("phone")
@@ -19,12 +22,13 @@ class Contact : Serializable {
     @SerializedName("site")
     val site: String = ""
     @SerializedName("country")
-    val country: Country? = null
+    val country: Country? = Country()
     @SerializedName("city")
-    val city: City? = null
+    val city: City? = City()
     @SerializedName("coordinate")
-    val coordinate: Coordinate? = null
+    var coordinate: Coordinate = Coordinate()
     @SerializedName("socialNetworks")
-    val socialNetworks: List<SocialNetwork>? = null
+    val socialNetworks: List<SocialNetwork>? = mutableListOf()
+
 
 }

@@ -9,6 +9,9 @@ class EventListSelector {
     private var mail: Boolean = false
     private lateinit var eventList: MutableList<Event>
     private lateinit var eventListSelected: MutableList<Event>
+    private lateinit var favEventListSelected: MutableList<Event>
+    private lateinit var notListSelected: MutableList<Event>
+    private lateinit var mailListSelected: MutableList<Event>
     private var countryEvents: MutableList<Event> = mutableListOf()
     private var cityEvents: MutableList<Event> = mutableListOf()
 
@@ -20,6 +23,9 @@ class EventListSelector {
         this.mail = mail
         this.eventList = eventList
         eventListSelected = mutableListOf()
+/*        favEventListSelected = mutableListOf()
+        notListSelected = mutableListOf()
+        mailListSelected = mutableListOf()*/
 
         if (fav) {
             for (event in eventList) {
@@ -44,22 +50,30 @@ class EventListSelector {
             }
 
         }
+
+/*        for (event in eventList)
+            if( event.favourite == fav && event.notifications == not && event.signed == mail)
+                eventListSelected.add(event)*/
+
         return eventListSelected
     }
 
-    fun cityEventSearch(events: MutableList<Event>, city: String) : MutableList<Event> {
+    fun cityEventSearch(events: MutableList<Event>, cityList: MutableList<String>) : MutableList<Event> {
         for (e in events) {
-            if (city.equals(e.contact!!.city!!.name))
-                cityEvents.add(e)
+            for(c in cityList) {
+                if (c.equals(e.contact!!.city!!.name))
+                    cityEvents.add(e)
+            }
         }
         return cityEvents
     }
 
-    fun countryEventSearch(events: MutableList<Event>, country : String)  : MutableList<Event>  {
+    fun countryEventSearch(events: MutableList<Event>,  countryList: MutableList<String>)  : MutableList<Event>  {
         for (e in events) {
-
-            if (country.equals(e.contact!!.country!!.name))
-                countryEvents.add(e)
+            for(c in countryList) {
+                if (c.equals(e.contact!!.country!!.name))
+                    countryEvents.add(e)
+            }
         }
         return countryEvents
     }

@@ -9,9 +9,9 @@ class Price : Serializable {
     @SerializedName("amount")
     val amount: Double = 0.0
     @SerializedName("currency")
-    val currency: Currency? = null
+    val currency: Currency? = Currency()
     @SerializedName("participationFormat")
-    val participationFormat: participationFormat? = null
+    val participationFormat: ParticipationFormat? = ParticipationFormat()
     @SerializedName("shortDescription")
     val shortDescription: String = ""
 }

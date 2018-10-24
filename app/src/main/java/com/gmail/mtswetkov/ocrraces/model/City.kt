@@ -12,5 +12,5 @@ class City : Serializable {
     @SerializedName("engName")
     val engName: String = ""
     @SerializedName("country")
-    val country: Country? = null
+    val country: Country? = Country()
 }

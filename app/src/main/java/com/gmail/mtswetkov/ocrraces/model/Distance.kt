@@ -9,5 +9,5 @@ class Distance :Serializable {
     @SerializedName("value")
     val value: Double = 0.0
     @SerializedName("measure")
-    val measure: Measure? = null
+    val measure: Measure? = Measure()
 }

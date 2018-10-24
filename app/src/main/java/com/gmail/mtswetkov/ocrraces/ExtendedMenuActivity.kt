@@ -1,25 +1,41 @@
 package com.gmail.mtswetkov.ocrraces
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.view.View
 import kotlinx.android.synthetic.main.extended_menu_activity.*
 import com.gmail.mtswetkov.ocrraces.model.Event
 import com.gmail.mtswetkov.ocrraces.model.SharedPrefWorker
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.google.gson.Gson
 
 
 class ExtendedMenuActivity : AppCompatActivity() {
 
     private var events: MutableList<Event> = mutableListOf()
-
-    private var cities: MutableList<String> = mutableListOf()
-    private var countries: MutableList<String> = mutableListOf()
     private var eventsSelectedList: MutableList<Event> = mutableListOf()
 
+
+    companion object {
+        var cities: MutableList<String> = mutableListOf()
+        var countries: MutableList<String> = mutableListOf()
+        var choosenCity: MutableList<String> = mutableListOf()
+        var choosenCountry: MutableList<String> = mutableListOf()
+        var mOnChange = ValueChangeListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        cityAndCountryTVUpdater()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        choosenCountry = mutableListOf()
+        choosenCity = mutableListOf()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,27 +55,61 @@ class ExtendedMenuActivity : AppCompatActivity() {
                 android.R.layout.simple_dropdown_item_1line, countries))
 
         city_choice_view.setOnClickListener {
-            eventsSelectedList = EventListSelector().cityEventSearch(events, city_choice_view.text.toString())
+            choosenCity = mutableListOf()
+            choosenCity.add(city_choice_view.text.toString().trim())
+            eventsSelectedList = EventListSelector().cityEventSearch(events, choosenCity)
             srchActivityOpener(eventsSelectedList)
         }
 
         country_choice_view.setOnClickListener {
-            eventsSelectedList = EventListSelector().countryEventSearch(events, country_choice_view.text.toString())
+            choosenCountry = mutableListOf()
+            choosenCountry.add(country_choice_view.text.toString().trim())
+            eventsSelectedList = EventListSelector().countryEventSearch(events, choosenCountry)
             srchActivityOpener(eventsSelectedList)
         }
 
         srch_btn.setOnClickListener {
             eventsSelectedList = events
-            if(switch1.isChecked or switch2.isChecked or switch3.isChecked)eventsSelectedList =
+            if (switch1.isChecked or switch2.isChecked or switch3.isChecked) eventsSelectedList =
                     EventListSelector().select(switch1.isChecked, switch2.isChecked, switch3.isChecked, events)
-            if(city_choice_view.text.toString()!="")eventsSelectedList = EventListSelector().cityEventSearch(eventsSelectedList, city_choice_view.text.toString())
-            if(country_choice_view.text.toString()!="")eventsSelectedList = EventListSelector().countryEventSearch(eventsSelectedList, country_choice_view.text.toString())
-            srchActivityOpener(eventsSelectedList)
+            if (city_choice_view.text.toString() != "") eventsSelectedList = EventListSelector().cityEventSearch(eventsSelectedList, choosenCity)
+            if (country_choice_view.text.toString() != "") eventsSelectedList = EventListSelector().countryEventSearch(eventsSelectedList, choosenCountry)
+            if(eventsSelectedList.size != 0){
+            srchActivityOpener(eventsSelectedList)}
+            else{
+                Toast.makeText(this, R.string.text_for_srch_btn, Toast.LENGTH_LONG).show()
+            }
+
         }
 
+        searchCityListBtn.setOnClickListener {
+            choosenCity = mutableListOf()
+            getLocationCityOrCountry(1)
+        }
+
+        searchCountryListBtn.setOnClickListener {
+            choosenCountry = mutableListOf()
+            getLocationCityOrCountry(2)
+        }
+
+        mOnChange.setListener(object : ValueChangeListener.ChangeListener {
+            override fun onChange() {
+                cityAndCountryTVUpdater()
+            }
+        })
     }
 
-    fun srchActivityOpener(eventsSelectedList : MutableList<Event>) {
+    private fun getLocationCityOrCountry(num: Int) {
+
+        val cityAndCounryList = CityAndCounryList()
+        val fm = this@ExtendedMenuActivity.fragmentManager
+        val args = Bundle()
+        args.putInt("num", num)
+        cityAndCounryList.arguments = args
+        cityAndCounryList.show(fm, "name")
+    }
+
+    private fun srchActivityOpener(eventsSelectedList: MutableList<Event>) {
         if (eventsSelectedList.size != 0) {
             val i = Intent(this@ExtendedMenuActivity, SearchActivity::class.java)
             val jsonString = Gson().toJson(eventsSelectedList)
@@ -68,4 +118,24 @@ class ExtendedMenuActivity : AppCompatActivity() {
         }
     }
 
+    fun cityAndCountryTVUpdater(){
+        if (choosenCity.size != 0) {
+            var cityList = ""
+            if (choosenCity.size != 0) {
+                for (c in choosenCity) {
+                    cityList += "$c, "
+                }
+                city_choice_view.setText(cityList)
+            }
+        }else city_choice_view.setText("")
+        if (choosenCountry.size != 0) {
+            var countryList = ""
+            if (choosenCountry.size != 0) {
+                for (c in choosenCountry) {
+                    countryList += "$c, "
+                }
+                country_choice_view.setText(countryList)
+            }
+        }else country_choice_view.setText("")
+    }
 }

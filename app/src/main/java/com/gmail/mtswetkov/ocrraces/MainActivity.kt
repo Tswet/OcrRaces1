@@ -15,6 +15,7 @@ import android.net.ConnectivityManager
 import android.support.v4.widget.SwipeRefreshLayout
 import android.text.format.DateFormat
 import android.text.format.DateFormat.*
+import android.util.Log
 import android.view.*
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var itemAdapter: EventAdapter
     private var events: MutableList<Event> = mutableListOf()
     private var eventsSelectedList: MutableList<Event> = mutableListOf()
-    lateinit var singleEvent: Event
+    var singleEvent: Event = Event()
     private val repository = SearchRepositoryProvider.provideSearchRepository()
     private var userMail: String = ""
 
@@ -88,7 +89,6 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         val netInfo = cm.activeNetworkInfo
         if (netInfo != null && netInfo.isConnected) {
             getDataFromServer()
-            //while(events.size == 0) getDataFromServer()
         } else {
             events = SharedPrefWorker(this).getAllEventsList()
             if (events.size > 0) {

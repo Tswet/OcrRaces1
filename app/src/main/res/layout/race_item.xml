@@ -112,6 +112,7 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@drawable/starsm"
+            android:scaleType="fitCenter"
             android:contentDescription="@string/favorite_title" />
 
         <ImageButton
@@ -121,6 +122,7 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@drawable/bellsm"
+            android:scaleType="fitCenter"
             android:contentDescription="@string/notification"/>
 
         <ImageButton
@@ -129,6 +131,7 @@
             android:layout_height="26sp"
             android:layout_weight="1"
             android:background="@color/white"
+            android:scaleType="fitCenter"
             android:contentDescription="@string/mail_title"
             android:src="@drawable/emailsm"/>
 

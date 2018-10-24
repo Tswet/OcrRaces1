@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull
 import java.io.Serializable
 import java.util.*
 
-class Event() : Serializable {
+class Event : Serializable {
     @SerializedName("id")
     val id: Int = 0
     @SerializedName("name")
@@ -23,13 +23,13 @@ class Event() : Serializable {
     @SerializedName("fullDescription")
     val fullDescription: String = ""
     @SerializedName("contact")
-    val contact: Contact? = null
+    val contact: Contact? = Contact()
     @SerializedName("distances")
-    val distances: List<Distance>? = null
+    val distances: List<Distance>? = mutableListOf()
     @SerializedName("eventType")
-    val eventType: EventType? = null
+    val eventType: EventType? = EventType()
     @SerializedName("prices")
-    val prices: List<Price>? = null
+    val prices: List<Price>? = mutableListOf()
     @SerializedName("favourite")
     var favourite: Boolean = false
     @SerializedName("notifications")

@@ -801,6 +801,7 @@
             android:paddingTop="3sp"
             android:background="@color/lightGray"
             android:src="@drawable/star"
+            android:scaleType="fitCenter"
             android:contentDescription="@string/favorite_title" />
 
         <ImageButton
@@ -811,6 +812,7 @@
             android:paddingTop="3sp"
             android:background="@color/lightGray"
             android:src="@drawable/bell"
+            android:scaleType="fitCenter"
             android:contentDescription="@string/notification"/>
 
         <ImageButton
@@ -821,6 +823,7 @@
             android:paddingTop="3sp"
             android:background="@color/lightGray"
             android:src="@drawable/email"
+            android:scaleType="fitCenter"
             android:contentDescription="@string/mail_notification"/>
     </LinearLayout>
 </LinearLayout>
