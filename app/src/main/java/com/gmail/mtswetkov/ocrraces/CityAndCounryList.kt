@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.city_list_layout.view.*
 
 class CityAndCounryList : DialogFragment() {
 
-    var list: MutableList<String> = mutableListOf()
+    private var list: MutableList<String> = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater?, container:
     ViewGroup?, savedInstanceState: Bundle?): View {
@@ -20,17 +20,17 @@ class CityAndCounryList : DialogFragment() {
         val myView = inflater!!.inflate(R.layout.city_list_layout
                 , container, false)
 
-        val mNum = getArguments().getInt("num");
+        val mNum = arguments.getInt("num")
         val ll: LinearLayout = myView.city_country_list_layout
-        if (mNum == 1) {
-            list = ExtendedMenuActivity.cities
-        } else list = ExtendedMenuActivity.countries
+        list = if (mNum == 1) {
+            ExtendedMenuActivity.cities
+        } else ExtendedMenuActivity.countries
         val choosenList: MutableList<String> = mutableListOf()
 
         list.sort()
         for (l in list) {
             val item = CheckBox(activity)
-            item.setText(l)
+            item.text = l
             item.setOnClickListener {
                 if (item.isChecked) {
                     choosenList.add(item.text.toString())
