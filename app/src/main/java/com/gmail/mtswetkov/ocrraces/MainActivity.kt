@@ -212,11 +212,11 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             R.id.favoriteMenu ->
                 eventsSelectedList = EventListSelector().select(true, false, false, events)
 
-            R.id.notificationMenu ->
+/*            R.id.notificationMenu ->
                 eventsSelectedList = EventListSelector().select(false, true, false, events)
 
             R.id.mailMenu ->
-                eventsSelectedList = EventListSelector().select(false, false, true, events)
+                eventsSelectedList = EventListSelector().select(false, false, true, events)*/
 
             R.id.extMenu -> {
                 eventsSelectedList = mutableListOf()

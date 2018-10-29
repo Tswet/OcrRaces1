@@ -29,7 +29,6 @@ import android.text.format.DateFormat
 import android.util.Log
 
 
-
 class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private var event: Event = Event()
@@ -71,25 +70,24 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         val mounth = DateFormat.format("MM", event.date)
 
 
-
         val favoritBtn: ImageButton = findViewById(R.id.favoritBtn)
         val notifBtn: ImageButton = findViewById(R.id.notifBtn)
         val mailNotifBtn: ImageButton = findViewById(R.id.mailNotifBtn)
 
-        val jsonString : String = gson.toJson(event.contact)
+        val jsonString: String = gson.toJson(event.contact)
         Log.d("events_LIST", jsonString)
 
-        if(event.contact?.coordinate == null)
+        if (event.contact?.coordinate == null)
             event.contact?.coordinate = Coordinate()
 
-        Log.d("events_LIST",  event.contact?.coordinate.toString())
+        Log.d("events_LIST", event.contact?.coordinate.toString())
 
 
-        if (event.contact?.coordinate?.latitude != "" && event.contact?.coordinate?.latitude != null ) {
+        if (event.contact?.coordinate?.latitude != "" && event.contact?.coordinate?.latitude != null) {
             raceLat = event.contact!!.coordinate.latitude.toDouble()
         }
 
-        if (event.contact?.coordinate?.longitude != "" && event.contact?.coordinate?.longitude != null ) {
+        if (event.contact?.coordinate?.longitude != "" && event.contact?.coordinate?.longitude != null) {
             raceLong = event.contact!!.coordinate.longitude.toDouble()
         }
 
@@ -111,7 +109,7 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
             }
         }
 
-        actTitle = getString(R.string.activity_title,event.name, day.toString(), MonthNameFormater().formaterText(mounth.toString().toInt()-1), year)
+        actTitle = getString(R.string.activity_title, event.name, day.toString(), MonthNameFormater().formaterText(mounth.toString().toInt() - 1), year)
         this.supportActionBar?.title = actTitle
 
         //Mail Subscribe section
@@ -178,7 +176,7 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         }
         if (pfSiaze > 6) {
             if (event.prices!!.get(6).participationFormat!!.name != "") {
-                rPartExtended.setText(event.prices!!.get(6).participationFormat!!.name)
+                rPartExtended.text = event.prices!!.get(6).participationFormat!!.name
                 rPartExtended.visibility = View.VISIBLE
                 rPartExtendedDesc.setText(event.prices!!.get(6).participationFormat!!.shortDescription)
                 rPartExtendedDesc.visibility = View.VISIBLE
@@ -192,64 +190,266 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
                 rPartExtended2Desc.visibility = View.VISIBLE
             }
         }
+        if (pfSiaze > 8) {
+            if (event.prices!!.get(8).participationFormat!!.name != "") {
+                rPart9.setText(event.prices!!.get(8).participationFormat!!.name)
+                rPart9.visibility = View.VISIBLE
+                rPart9Desc.setText(event.prices!!.get(8).participationFormat!!.shortDescription)
+                rPart9Desc.visibility = View.VISIBLE
+            }
+        }
+        if (pfSiaze > 9) {
+            if (event.prices!!.get(9).participationFormat!!.name != "") {
+                rPart10.setText(event.prices!!.get(9).participationFormat!!.name)
+                rPart10.visibility = View.VISIBLE
+                rPart10Desc.setText(event.prices!!.get(9).participationFormat!!.shortDescription)
+                rPart10Desc.visibility = View.VISIBLE
+            }
+        }
+        if (pfSiaze > 10) {
+            if (event.prices!!.get(10).participationFormat!!.name != "") {
+                rPart11.setText(event.prices!!.get(10).participationFormat!!.name)
+                rPart11.visibility = View.VISIBLE
+                rPart11Desc.setText(event.prices!!.get(10).participationFormat!!.shortDescription)
+                rPart11Desc.visibility = View.VISIBLE
+            }
+        }
+        if (pfSiaze > 11) {
+            if (event.prices!!.get(11).participationFormat!!.name != "") {
+                rPart12.setText(event.prices!!.get(11).participationFormat!!.name)
+                rPart12.visibility = View.VISIBLE
+                rPart12Desc.setText(event.prices!!.get(11).participationFormat!!.shortDescription)
+                rPart12Desc.visibility = View.VISIBLE
+            }
+        }
+        if (pfSiaze > 12) {
+            if (event.prices!!.get(12).participationFormat!!.name != "") {
+                rPart13.setText(event.prices!!.get(12).participationFormat!!.name)
+                rPart13.visibility = View.VISIBLE
+                rPart13Desc.setText(event.prices!!.get(12).participationFormat!!.shortDescription)
+                rPart13Desc.visibility = View.VISIBLE
+            }
+        }
+        if (pfSiaze > 13) {
+            if (event.prices!!.get(13).participationFormat!!.name != "") {
+                rPart14.setText(event.prices!!.get(13).participationFormat!!.name)
+                rPart14.visibility = View.VISIBLE
+                rPart14Desc.setText(event.prices!!.get(13).participationFormat!!.shortDescription)
+                rPart14Desc.visibility = View.VISIBLE
+            }
+        }
+        if (pfSiaze > 14) {
+            if (event.prices!!.get(14).participationFormat!!.name != "") {
+                rPart15.setText(event.prices!!.get(14).participationFormat!!.name)
+                rPart15.visibility = View.VISIBLE
+                rPart15Desc.setText(event.prices!!.get(14).participationFormat!!.shortDescription)
+                rPart15Desc.visibility = View.VISIBLE
+            }
+        }
+        if (pfSiaze > 15) {
+            if (event.prices!!.get(15).participationFormat!!.name != "") {
+                rPart16.setText(event.prices!!.get(15).participationFormat!!.name)
+                rPart16.visibility = View.VISIBLE
+                rPart16Desc.setText(event.prices!!.get(15).participationFormat!!.shortDescription)
+                rPart16Desc.visibility = View.VISIBLE
+            }
+        }
+        if (pfSiaze > 16) {
+            if (event.prices!!.get(16).participationFormat!!.name != "") {
+                rPart17.setText(event.prices!!.get(16).participationFormat!!.name)
+                rPart17.visibility = View.VISIBLE
+                rPart17Desc.setText(event.prices!!.get(16).participationFormat!!.shortDescription)
+                rPart17Desc.visibility = View.VISIBLE
+            }
+        }
+        if (pfSiaze > 17) {
+            if (event.prices!!.get(17).participationFormat!!.name != "") {
+                rPart18.setText(event.prices!!.get(17).participationFormat!!.name)
+                rPart18.visibility = View.VISIBLE
+                rPart18Desc.setText(event.prices!!.get(17).participationFormat!!.shortDescription)
+                rPart18Desc.visibility = View.VISIBLE
+            }
+        }
+        if (pfSiaze > 18) {
+            if (event.prices!!.get(18).participationFormat!!.name != "") {
+                rPart19.setText(event.prices!!.get(18).participationFormat!!.name)
+                rPart19.visibility = View.VISIBLE
+                rPart19Desc.setText(event.prices!!.get(18).participationFormat!!.shortDescription)
+                rPart19Desc.visibility = View.VISIBLE
+            }
+        }
+        if (pfSiaze > 19) {
+            if (event.prices!!.get(19).participationFormat!!.name != "") {
+                rPart20.setText(event.prices!!.get(19).participationFormat!!.name)
+                rPart20.visibility = View.VISIBLE
+                rPart20Desc.setText(event.prices!!.get(19).participationFormat!!.shortDescription)
+                rPart20Desc.visibility = View.VISIBLE
+            }
+        }
 
 
         //Distance Section
         val distListLenght = event.distances!!.size
+        val distArray: MutableList<Double> = mutableListOf()
+        var eventDistCount = 0
+
+        while (eventDistCount < event.distances!!.size) {
+            distArray.add( event.distances!!.get(eventDistCount).value)
+            eventDistCount++
+        }
+        distArray.sort()
+
         if (distListLenght > 0) {
-            rDist1?.setText(getString(R.string.raceDist1, event.distances!!.get(0).value.toInt().toString(), event.distances!!.get(0).measure!!.name))
+            rDist1?.setText(getString(R.string.raceDist1, distArray.get(0).toInt().toString(), event.distances!!.get(0).measure!!.name))
             rDist1?.visibility = View.VISIBLE
         }
         if (distListLenght > 1) {
-            rDist2?.setText(getString(R.string.raceDist2, event.distances!!.get(1).value.toInt().toString(), event.distances!!.get(1).measure!!.name))
+            rDist2?.setText(getString(R.string.raceDist2, distArray.get(1).toInt().toString(), event.distances!!.get(1).measure!!.name))
             rDist2?.visibility = View.VISIBLE
         }
         if (distListLenght > 2) {
-            rDist3?.setText(getString(R.string.raceDist3, event.distances!!.get(2).value.toInt().toString(), event.distances!!.get(2).measure!!.name))
+            rDist3?.setText(getString(R.string.raceDist3, distArray.get(2).toInt().toString(), event.distances!!.get(2).measure!!.name))
             rDist3?.visibility = View.VISIBLE
         }
         if (distListLenght > 3) {
-            rDist4?.setText(getString(R.string.raceDist3, event.distances!!.get(3).value.toInt().toString(), event.distances!!.get(3).measure!!.name))
+            rDist4?.setText(getString(R.string.raceDist3, distArray.get(3).toInt().toString(), event.distances!!.get(3).measure!!.name))
             rDist4?.visibility = View.VISIBLE
         }
         if (distListLenght > 4) {
-            rDist5?.setText(getString(R.string.raceDist3, event.distances!!.get(4).value.toInt().toString(), event.distances!!.get(4).measure!!.name))
+            rDist5?.setText(getString(R.string.raceDist3, distArray.get(4).toInt().toString(), event.distances!!.get(4).measure!!.name))
             rDist5?.visibility = View.VISIBLE
+        }
+        if (distListLenght > 5) {
+            rDist6?.setText(getString(R.string.raceDist3, distArray.get(5).toInt().toString(), event.distances!!.get(4).measure!!.name))
+            rDist6?.visibility = View.VISIBLE
+        }
+        if (distListLenght > 6) {
+            rDist7?.setText(getString(R.string.raceDist3, distArray.get(6).toInt().toString(), event.distances!!.get(4).measure!!.name))
+            rDist7?.visibility = View.VISIBLE
+        }
+        if (distListLenght > 7) {
+            rDist8?.setText(getString(R.string.raceDist3, distArray.get(7).toInt().toString(), event.distances!!.get(4).measure!!.name))
+            rDist8?.visibility = View.VISIBLE
+        }
+        if (distListLenght > 8) {
+            rDist9?.setText(getString(R.string.raceDist3, distArray.get(8).toInt().toString(), event.distances!!.get(4).measure!!.name))
+            rDist9?.visibility = View.VISIBLE
+        }
+        if (distListLenght > 9) {
+            rDist10?.setText(getString(R.string.raceDist3, distArray.get(9).toInt().toString(), event.distances!!.get(4).measure!!.name))
+            rDist10?.visibility = View.VISIBLE
+        }
+        if (distListLenght > 10) {
+            rDist11?.setText(getString(R.string.raceDist3, distArray.get(10).toInt().toString(), event.distances!!.get(4).measure!!.name))
+            rDist11?.visibility = View.VISIBLE
+        }
+        if (distListLenght > 11) {
+            rDist12?.setText(getString(R.string.raceDist3, distArray.get(11).toInt().toString(), event.distances!!.get(4).measure!!.name))
+            rDist12?.visibility = View.VISIBLE
+        }
+        if (distListLenght > 12) {
+            rDist13?.setText(getString(R.string.raceDist3, distArray.get(12).toInt().toString(), event.distances!!.get(4).measure!!.name))
+            rDist13?.visibility = View.VISIBLE
+        }
+        if (distListLenght > 13) {
+            rDist14?.setText(getString(R.string.raceDist3, distArray.get(13).toInt().toString(), event.distances!!.get(4).measure!!.name))
+            rDist14?.visibility = View.VISIBLE
+        }
+        if (distListLenght > 14) {
+            rDist15?.setText(getString(R.string.raceDist3, distArray.get(14).toInt().toString(), event.distances!!.get(4).measure!!.name))
+            rDist15?.visibility = View.VISIBLE
         }
 
         //Price Section
-        val priceSize = event.prices!!.size
+        val priceList : MutableList<Price> = mutableListOf()
+        var eventPriceCount = 0
+
+        while (eventPriceCount < event.prices!!.size) {
+            priceList.add( event.prices!![eventPriceCount])
+            eventPriceCount++
+        }
+        priceList.sortBy { it.amount }
+
+        val priceSize = priceList.size
         if (priceSize > 0) {
-            rPrice1?.text = getString(R.string.priceOne, event.prices!![0].amount.toInt().toString(), event.prices!![0].currency!!.name, event.prices!![0].participationFormat!!.name)
+            rPrice1?.text = getString(R.string.priceOne, priceList[0].amount.toInt().toString(), priceList[0].currency!!.name, priceList[0].participationFormat!!.name)
             rPrice1.visibility = View.VISIBLE
         }
         if (priceSize > 1) {
-            rPrice2?.text = getString(R.string.priceTwo, event.prices!!.get(1).amount.toInt().toString(), event.prices!!.get(1).currency!!.name, event.prices!![1].participationFormat!!.name)
+            rPrice2?.text = getString(R.string.priceTwo, priceList[1].amount.toInt().toString(), priceList.get(1).currency!!.name, priceList[1].participationFormat!!.name)
             rPrice2.visibility = View.VISIBLE
         }
         if (priceSize > 2) {
-            rPrice3?.text = getString(R.string.priceTwo, event.prices!!.get(2).amount.toInt().toString(), event.prices!!.get(2).currency!!.name, event.prices!![2].participationFormat!!.name)
+            rPrice3?.text = getString(R.string.priceTwo,priceList[2].amount.toInt().toString(), priceList.get(2).currency!!.name, priceList[2].participationFormat!!.name)
             rPrice3.visibility = View.VISIBLE
         }
         if (priceSize > 3) {
-            rPrice4?.text = getString(R.string.priceTwo, event.prices!!.get(3).amount.toInt().toString(), event.prices!!.get(3).currency!!.name, event.prices!![3].participationFormat!!.name)
+            rPrice4?.text = getString(R.string.priceTwo,priceList.get(3).amount.toInt().toString(), priceList.get(3).currency!!.name, priceList[3].participationFormat!!.name)
             rPrice4.visibility = View.VISIBLE
         }
         if (priceSize > 4) {
-            rPrice5?.text = getString(R.string.priceTwo, event.prices!!.get(4).amount.toInt().toString(), event.prices!!.get(4).currency!!.name, event.prices!![4].participationFormat!!.name)
+            rPrice5?.text = getString(R.string.priceTwo, priceList.get(4).amount.toInt().toString(), priceList.get(4).currency!!.name, priceList[4].participationFormat!!.name)
             rPrice5.visibility = View.VISIBLE
         }
         if (priceSize > 5) {
-            rPrice6?.text = getString(R.string.priceTwo, event.prices!!.get(5).amount.toInt().toString(), event.prices!!.get(5).currency!!.name, event.prices!![5].participationFormat!!.name)
+            rPrice6?.text = getString(R.string.priceTwo, priceList.get(5).amount.toInt().toString(), priceList.get(5).currency!!.name, priceList[5].participationFormat!!.name)
             rPrice6.visibility = View.VISIBLE
         }
         if (priceSize > 6) {
-            rPrice7?.text = getString(R.string.priceTwo, event.prices!!.get(6).amount.toInt().toString(), event.prices!!.get(6).currency!!.name, event.prices!![6].participationFormat!!.name)
+            rPrice7?.text = getString(R.string.priceTwo, priceList.get(6).amount.toInt().toString(), priceList.get(6).currency!!.name, priceList[6].participationFormat!!.name)
             rPrice7.visibility = View.VISIBLE
         }
         if (priceSize > 7) {
-            rPrice8?.text = getString(R.string.priceTwo, event.prices!!.get(7).amount.toInt().toString(), event.prices!!.get(7).currency!!.name, event.prices!![7].participationFormat!!.name)
+            rPrice8?.text = getString(R.string.priceTwo, priceList.get(7).amount.toInt().toString(), priceList.get(7).currency!!.name, priceList[7].participationFormat!!.name)
             rPrice8.visibility = View.VISIBLE
+        }
+        if (priceSize > 8) {
+            rPrice9?.text = getString(R.string.priceTwo, priceList.get(8).amount.toInt().toString(), priceList.get(8).currency!!.name, priceList[8].participationFormat!!.name)
+            rPrice9.visibility = View.VISIBLE
+        }
+        if (priceSize > 9) {
+            rPrice10?.text = getString(R.string.priceTwo, priceList.get(9).amount.toInt().toString(), priceList.get(9).currency!!.name, priceList[9].participationFormat!!.name)
+            rPrice10.visibility = View.VISIBLE
+        }
+        if (priceSize > 10) {
+            rPrice11?.text = getString(R.string.priceTwo, priceList.get(10).amount.toInt().toString(), priceList.get(10).currency!!.name, priceList[10].participationFormat!!.name)
+            rPrice11.visibility = View.VISIBLE
+        }
+        if (priceSize > 11) {
+            rPrice12?.text = getString(R.string.priceTwo, priceList.get(11).amount.toInt().toString(), priceList.get(11).currency!!.name, priceList[11].participationFormat!!.name)
+            rPrice12.visibility = View.VISIBLE
+        }
+        if (priceSize > 12) {
+            rPrice13?.text = getString(R.string.priceTwo, priceList.get(12).amount.toInt().toString(), priceList.get(12).currency!!.name, priceList[12].participationFormat!!.name)
+            rPrice13.visibility = View.VISIBLE
+        }
+        if (priceSize > 13) {
+            rPrice14?.text = getString(R.string.priceTwo, priceList.get(13).amount.toInt().toString(), priceList.get(13).currency!!.name, priceList[13].participationFormat!!.name)
+            rPrice14.visibility = View.VISIBLE
+        }
+        if (priceSize > 14) {
+            rPrice15?.text = getString(R.string.priceTwo, priceList.get(14).amount.toInt().toString(), priceList.get(14).currency!!.name, priceList[14].participationFormat!!.name)
+            rPrice15.visibility = View.VISIBLE
+        }
+        if (priceSize > 15) {
+            rPrice16?.text = getString(R.string.priceTwo, priceList.get(15).amount.toInt().toString(), priceList.get(15).currency!!.name, priceList[15].participationFormat!!.name)
+            rPrice16.visibility = View.VISIBLE
+        }
+        if (priceSize > 16) {
+            rPrice17?.text = getString(R.string.priceTwo, priceList.get(16).amount.toInt().toString(), priceList.get(16).currency!!.name, priceList[16].participationFormat!!.name)
+            rPrice17.visibility = View.VISIBLE
+        }
+        if (priceSize > 17) {
+            rPrice18?.text = getString(R.string.priceTwo, priceList.get(17).amount.toInt().toString(), priceList.get(17).currency!!.name, priceList[17].participationFormat!!.name)
+            rPrice18.visibility = View.VISIBLE
+        }
+        if (priceSize > 18) {
+            rPrice19?.text = getString(R.string.priceTwo,priceList.get(18).amount.toInt().toString(), priceList.get(18).currency!!.name, priceList[18].participationFormat!!.name)
+            rPrice19.visibility = View.VISIBLE
+        }
+        if (priceSize > 19) {
+            rPrice20?.text = getString(R.string.priceTwo, priceList.get(19).amount.toInt().toString(), priceList.get(19).currency!!.name, priceList[19].participationFormat!!.name)
+            rPrice20.visibility = View.VISIBLE
         }
 
         //Contact Section

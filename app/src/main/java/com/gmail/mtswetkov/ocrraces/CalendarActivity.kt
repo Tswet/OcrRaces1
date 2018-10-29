@@ -35,6 +35,8 @@ class CalendarActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        favList = SharedPrefWorker(this).getFavoritrList()
+        Log.d("city", "onresume")
         dateDecorator()
     }
 
@@ -100,8 +102,8 @@ class CalendarActivity : AppCompatActivity() {
     private fun dateDecorator() {
         events = SharedPrefWorker(this).getAllEventsList()
         favList = SharedPrefWorker(this).getFavoritrList()
-        var favDateControlList: MutableList<Date> = mutableListOf() //не переключать в val - кадендарьне подхватывает обновления
-
+        var favDateControlList: MutableList<Date> = mutableListOf()
+        //Log.d("logevent", favList[1].toString())
 
         for (e in events) {
             if (favList.contains(e.id)) {

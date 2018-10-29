@@ -42,6 +42,7 @@ class SearchActivity : AppCompatActivity() {
         val b : Bundle = intent.extras
         val jsonString = b.getString(MainActivity.selected_list)
         events = Gson().fromJson(jsonString, object : TypeToken<MutableList<Event>>(){}.type)
+        events.sortBy { it.date }
 
         itemAdapter = EventAdapter()
         race_list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))

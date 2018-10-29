@@ -72,6 +72,8 @@
     <string name="activity_title">%1$s - %2$s %3$s %4$s</string>
     <string name="confirmBtn">Подтвердить</string>
     <string name="text_for_srch_btn">Мероприятий по вашему запросу не найдено</string>
+    <string name="chose_сity">Выберите список городов</string>
+    <string name="chose_country">Выберите список стран</string>
 
 
 </resources>

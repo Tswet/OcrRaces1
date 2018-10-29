@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.city_list_layout.view.*
 
+
 class CityAndCounryList : DialogFragment() {
 
     private var list: MutableList<String> = mutableListOf()
@@ -19,9 +20,13 @@ class CityAndCounryList : DialogFragment() {
 
         val myView = inflater!!.inflate(R.layout.city_list_layout
                 , container, false)
-
         val mNum = arguments.getInt("num")
         val ll: LinearLayout = myView.city_country_list_layout
+        val title: TextView = myView.cityOrCountyTitle
+        val titleText = if (mNum == 1) {
+            getString(R.string.chose_сity)
+        } else getString(R.string.chose_country)
+        title.text = titleText
         list = if (mNum == 1) {
             ExtendedMenuActivity.cities
         } else ExtendedMenuActivity.countries

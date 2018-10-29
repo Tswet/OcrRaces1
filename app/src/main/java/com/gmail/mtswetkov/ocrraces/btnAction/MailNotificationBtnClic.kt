@@ -2,8 +2,6 @@ package com.gmail.mtswetkov.ocrraces.btnAction
 
 import android.content.Context
 import android.support.v7.app.AlertDialog
-import android.text.InputType
-import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -41,7 +39,7 @@ class MailNotificationBtnClic {
             builder.setPositiveButton("OK") { _, _ ->
                 //dialog, wichButton
                 if (EmailValidator.isEmailValid(input.text.toString())) {
-                    userEmail = input.text.toString()
+                    userEmail = input.text.toString().trim()
                     repository.subscribe("iQQnMEX22LPn5Ipy4Rxx83zs5", userEmail, event.id)
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.io())
@@ -65,7 +63,7 @@ class MailNotificationBtnClic {
             builder.create().show()
         } else {
             if (userEmailfromSP != "") userEmail = userEmailfromSP
-            Toast.makeText(context, userEmail, Toast.LENGTH_LONG).show()
+            //Toast.makeText(context, userEmail, Toast.LENGTH_LONG).show()
             repository.unsubscribe("iQQnMEX22LPn5Ipy4Rxx83zs5", userEmail, event.id)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())

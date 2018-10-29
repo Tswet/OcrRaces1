@@ -22,23 +22,23 @@
                 android:id="@+id/rImage"
                 android:layout_width="match_parent"
                 android:layout_height="183sp"
+                android:contentDescription="@string/event_logo"
                 android:scaleType="centerCrop"
                 app:srcCompat="@mipmap/ic_launcher"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="1sp"
-                tools:layout_editor_absoluteY="7sp"
-                android:contentDescription="@string/event_logo" />
+                tools:layout_editor_absoluteY="7sp" />
 
             <ImageView
                 android:id="@+id/rIcon"
                 android:layout_width="86sp"
                 android:layout_height="82sp"
-                android:layout_marginBottom="20sp"
                 android:layout_marginStart="8sp"
+                android:layout_marginBottom="20sp"
+                android:contentDescription="@string/event_picture"
                 app:layout_constraintBottom_toTopOf="@+id/rName"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@mipmap/ic_launcher"
-                android:contentDescription="@string/event_picture" />
+                app:srcCompat="@mipmap/ic_launcher" />
 
             <TextView
                 android:id="@+id/rName"
@@ -133,10 +133,10 @@
                 android:id="@+id/rPartOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
                 android:text="@string/format_part_one"
                 android:textColor="@color/black"
-                android:layout_marginTop="8sp"
-                android:layout_marginStart="12sp"
                 android:textSize="17sp"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rPartKidsDesc" />
@@ -181,7 +181,7 @@
                 android:textColor="@color/black"
                 android:textSize="17sp"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/rPartTeamDesc"/>
+                app:layout_constraintTop_toBottomOf="@+id/rPartTeamDesc" />
 
 
             <TextView
@@ -281,6 +281,256 @@
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rPartExtended2" />
 
+            <TextView
+                android:id="@+id/rPart9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPartExtended2Desc" />
+
+
+            <TextView
+                android:id="@+id/rPart9Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart9" />
+
+            <TextView
+                android:id="@+id/rPart10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart9Desc" />
+
+            <TextView
+                android:id="@+id/rPart10Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart10" />
+
+            <TextView
+                android:id="@+id/rPart11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart10Desc" />
+
+            <TextView
+                android:id="@+id/rPart11Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart11" />
+
+            <TextView
+                android:id="@+id/rPart12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart11Desc" />
+
+            <TextView
+                android:id="@+id/rPart12Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart12" />
+
+            <TextView
+                android:id="@+id/rPart13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart12Desc" />
+
+            <TextView
+                android:id="@+id/rPart13Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart13" />
+
+            <TextView
+                android:id="@+id/rPart14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart13Desc" />
+
+            <TextView
+                android:id="@+id/rPart14Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart14" />
+
+            <TextView
+                android:id="@+id/rPart15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart14Desc" />
+
+            <TextView
+                android:id="@+id/rPart15Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart15" />
+
+            <TextView
+                android:id="@+id/rPart16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart15Desc" />
+
+            <TextView
+                android:id="@+id/rPart16Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart16" />
+            <TextView
+                android:id="@+id/rPart17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart16Desc" />
+
+            <TextView
+                android:id="@+id/rPart17Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart17" />
+            <TextView
+                android:id="@+id/rPart18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart17Desc" />
+
+            <TextView
+                android:id="@+id/rPart18Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart18" />
+            <TextView
+                android:id="@+id/rPart19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart18Desc" />
+
+            <TextView
+                android:id="@+id/rPart19Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart19" />
+            <TextView
+                android:id="@+id/rPart20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/format_part_team"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart19Desc" />
+
+            <TextView
+                android:id="@+id/rPart20Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPart20" />
+
+
 
             <TextView
                 android:id="@+id/line2"
@@ -288,7 +538,7 @@
                 android:layout_height="1sp"
                 android:layout_marginTop="8sp"
                 android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@+id/rPartExtended2Desc" />
+                app:layout_constraintTop_toBottomOf="@+id/rPart20Desc" />
 
             <TextView
                 android:id="@+id/rDistLable"
@@ -308,8 +558,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
                 android:layout_marginTop="8sp"
-                android:visibility="gone"
                 android:text="@string/no_info"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rDistLable" />
 
             <TextView
@@ -318,8 +568,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
                 android:layout_marginTop="8sp"
-                android:visibility="gone"
                 android:text="@string/no_info"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rDist1" />
 
             <TextView
@@ -328,8 +578,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
                 android:layout_marginTop="8sp"
-                android:visibility="gone"
                 android:text="@string/no_info"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rDist2" />
 
             <TextView
@@ -338,8 +588,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
                 android:layout_marginTop="8sp"
-                android:visibility="gone"
                 android:text="@string/no_info"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rDist3" />
 
             <TextView
@@ -348,9 +598,109 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
                 android:layout_marginTop="8sp"
-                android:visibility="gone"
                 android:text="@string/no_info"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rDist4" />
+
+            <TextView
+                android:id="@+id/rDist6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rDist5" />
+
+            <TextView
+                android:id="@+id/rDist7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rDist6" />
+
+            <TextView
+                android:id="@+id/rDist8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rDist7" />
+
+            <TextView
+                android:id="@+id/rDist9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rDist8" />
+
+            <TextView
+                android:id="@+id/rDist10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rDist9" />
+
+            <TextView
+                android:id="@+id/rDist11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rDist10" />
+
+            <TextView
+                android:id="@+id/rDist12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rDist11" />
+
+            <TextView
+                android:id="@+id/rDist13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rDist12" />
+
+            <TextView
+                android:id="@+id/rDist14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rDist13" />
+
+            <TextView
+                android:id="@+id/rDist15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rDist14" />
 
             <TextView
                 android:id="@+id/line3"
@@ -358,7 +708,7 @@
                 android:layout_height="1sp"
                 android:layout_marginTop="8sp"
                 android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@+id/rDist5" />
+                app:layout_constraintTop_toBottomOf="@+id/rDist15" />
 
             <TextView
                 android:id="@+id/rPriceLable"
@@ -411,6 +761,7 @@
                 android:text="@string/no_info"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rPrice3" />
+
             <TextView
                 android:id="@+id/rPrice5"
                 android:layout_width="match_parent"
@@ -420,6 +771,7 @@
                 android:text="@string/no_info"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rPrice4" />
+
             <TextView
                 android:id="@+id/rPrice6"
                 android:layout_width="match_parent"
@@ -429,6 +781,7 @@
                 android:text="@string/no_info"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rPrice5" />
+
             <TextView
                 android:id="@+id/rPrice7"
                 android:layout_width="match_parent"
@@ -438,6 +791,7 @@
                 android:text="@string/no_info"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rPrice6" />
+
             <TextView
                 android:id="@+id/rPrice8"
                 android:layout_width="match_parent"
@@ -449,12 +803,132 @@
                 app:layout_constraintTop_toBottomOf="@+id/rPrice7" />
 
             <TextView
+                android:id="@+id/rPrice9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice8" />
+
+            <TextView
+                android:id="@+id/rPrice10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice9" />
+
+            <TextView
+                android:id="@+id/rPrice11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice10" />
+
+            <TextView
+                android:id="@+id/rPrice12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice11" />
+
+            <TextView
+                android:id="@+id/rPrice13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice12" />
+
+            <TextView
+                android:id="@+id/rPrice14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice13" />
+
+            <TextView
+                android:id="@+id/rPrice15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice14" />
+
+            <TextView
+                android:id="@+id/rPrice16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice15" />
+
+            <TextView
+                android:id="@+id/rPrice17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice16" />
+
+            <TextView
+                android:id="@+id/rPrice18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice17" />
+
+            <TextView
+                android:id="@+id/rPrice19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice18" />
+
+            <TextView
+                android:id="@+id/rPrice20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/no_info"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rPrice19" />
+
+            <TextView
                 android:id="@+id/line4"
                 android:layout_width="match_parent"
                 android:layout_height="1sp"
                 android:layout_marginTop="8sp"
                 android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@+id/rPrice8" />
+                app:layout_constraintTop_toBottomOf="@+id/rPrice20" />
 
             <TextView
                 android:id="@+id/rContactsLable"
@@ -469,22 +943,25 @@
                 app:layout_constraintTop_toBottomOf="@+id/line4" />
 
             <LinearLayout
+                android:id="@+id/eventContactHorizontalLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginStart="8sp"
                 android:layout_marginTop="8sp"
-                android:id="@+id/eventContactHorizontalLayout"
+                android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@+id/rContactsLable">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/rContactsCountryLabel"
                         android:layout_width="80sp"
                         android:layout_height="wrap_content"
                         android:text="@string/Country" />
+
                     <TextView
                         android:id="@+id/rContactsCountry"
                         android:layout_width="wrap_content"
@@ -496,11 +973,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/rContactsCityLabel"
                         android:layout_width="80sp"
                         android:layout_height="wrap_content"
                         android:text="@string/event_city_label" />
+
                     <TextView
                         android:id="@+id/rContactsCity"
                         android:layout_width="wrap_content"
@@ -514,11 +993,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/rContactsAdressLabel"
                         android:layout_width="80sp"
                         android:layout_height="wrap_content"
                         android:text="@string/event_adress_label" />
+
                     <TextView
                         android:id="@+id/rContactsAdress"
                         android:layout_width="wrap_content"
@@ -532,35 +1013,39 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/rContactsSiteLabel"
                         android:layout_width="80sp"
                         android:layout_height="wrap_content"
                         android:text="@string/event_site_label" />
+
                     <TextView
                         android:id="@+id/rContactsSite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/no_info"
                         android:autoLink="web"
-                        android:ellipsize="end" />
+                        android:ellipsize="end"
+                        android:text="@string/no_info" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/rContactsEmailLabel"
                         android:layout_width="80sp"
                         android:layout_height="wrap_content"
                         android:text="@string/event_email_label" />
+
                     <TextView
                         android:id="@+id/rContactsEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/no_info"
-                        android:autoLink="email" />
+                        android:autoLink="email"
+                        android:text="@string/no_info" />
 
                 </LinearLayout>
 
@@ -569,22 +1054,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/rContactsPhoneLabel"
                         android:layout_width="80sp"
                         android:layout_height="wrap_content"
                         android:text="@string/event_phone_label" />
+
                     <TextView
                         android:id="@+id/rContactsPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/no_info"
-                        android:autoLink="phone" />
+                        android:autoLink="phone"
+                        android:text="@string/no_info" />
                 </LinearLayout>
 
 
-
             </LinearLayout>
+
             <TextView
                 android:id="@+id/line5"
                 android:layout_width="match_parent"
@@ -696,59 +1183,59 @@
                 android:layout_marginStart="8sp"
                 android:layout_marginTop="8sp"
                 android:text="@string/loc_label"
+                android:textColor="@color/black"
                 android:textSize="19sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@+id/line6" />
 
             <LinearLayout
+                android:id="@+id/eventLocationLatitudeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginStart="8sp"
                 android:layout_marginTop="8sp"
-                android:id="@+id/eventLocationLatitudeLayout"
+                android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/locationLabel">
 
                 <TextView
                     android:id="@+id/eventLatitudeLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/event_latiitude"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="@string/event_latiitude" />
 
                 <TextView
                     android:id="@+id/eventLatitude"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/no_info"
-                    android:layout_weight="7"/>
+                    android:layout_weight="7"
+                    android:text="@string/no_info" />
 
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/eventLocationLongitudeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/eventLocationLongitudeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/eventLocationLatitudeLayout"
                 android:layout_marginStart="8sp"
-                android:layout_marginTop="8sp">
+                android:layout_marginTop="8sp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/eventLocationLatitudeLayout">
 
                 <TextView
                     android:id="@+id/eventLongitudeLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/event_longitude"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="@string/event_longitude" />
 
                 <TextView
                     android:id="@+id/eventLongitude"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/no_info"
-                    android:layout_weight="7"/>
+                    android:layout_weight="7"
+                    android:text="@string/no_info" />
 
             </LinearLayout>
 
@@ -777,12 +1264,12 @@
                     android:id="@+id/button"
                     android:layout_width="100sp"
                     android:layout_height="50sp"
-                    android:layout_alignParentBottom="true"
                     android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginBottom="10sp"
-                    android:src="@drawable/googlemaplogosmall"
                     android:contentDescription="@string/loc_label"
-                    android:onClick="googleMapsOpener"/>
+                    android:onClick="googleMapsOpener"
+                    android:src="@drawable/googlemaplogosmall" />
             </RelativeLayout>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
@@ -790,40 +1277,40 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="35sp"
-        android:orientation="horizontal"
-        android:background="@color/lightGray">
+        android:background="@color/lightGray"
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/favoritBtn"
             android:layout_width="40sp"
             android:layout_height="32sp"
             android:layout_weight="1"
-            android:paddingTop="3sp"
             android:background="@color/lightGray"
-            android:src="@drawable/star"
+            android:contentDescription="@string/favorite_title"
+            android:paddingTop="3sp"
             android:scaleType="fitCenter"
-            android:contentDescription="@string/favorite_title" />
+            android:src="@drawable/star" />
 
         <ImageButton
             android:id="@+id/notifBtn"
             android:layout_width="40sp"
             android:layout_height="32sp"
             android:layout_weight="1"
-            android:paddingTop="3sp"
             android:background="@color/lightGray"
-            android:src="@drawable/bell"
+            android:contentDescription="@string/notification"
+            android:paddingTop="3sp"
             android:scaleType="fitCenter"
-            android:contentDescription="@string/notification"/>
+            android:src="@drawable/bell" />
 
         <ImageButton
             android:id="@+id/mailNotifBtn"
             android:layout_width="40sp"
             android:layout_height="32sp"
             android:layout_weight="1"
-            android:paddingTop="3sp"
             android:background="@color/lightGray"
-            android:src="@drawable/email"
+            android:contentDescription="@string/mail_notification"
+            android:paddingTop="3sp"
             android:scaleType="fitCenter"
-            android:contentDescription="@string/mail_notification"/>
+            android:src="@drawable/email" />
     </LinearLayout>
 </LinearLayout>

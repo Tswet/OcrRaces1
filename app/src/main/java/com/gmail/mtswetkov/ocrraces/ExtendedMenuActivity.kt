@@ -56,14 +56,14 @@ class ExtendedMenuActivity : AppCompatActivity() {
 
         city_choice_view.setOnClickListener {
             choosenCity = mutableListOf()
-            choosenCity.add(city_choice_view.text.toString().trim())
+            if (choosenCity.size == 0) choosenCity = cityAndCountryTVSplit(city_choice_view.text.toString().trim())
             eventsSelectedList = EventListSelector().cityEventSearch(events, choosenCity)
             srchActivityOpener(eventsSelectedList)
         }
 
         country_choice_view.setOnClickListener {
             choosenCountry = mutableListOf()
-            choosenCountry.add(country_choice_view.text.toString().trim())
+            if (choosenCountry.size == 0) choosenCountry = cityAndCountryTVSplit(country_choice_view.text.toString().trim())
             eventsSelectedList = EventListSelector().countryEventSearch(events, choosenCountry)
             srchActivityOpener(eventsSelectedList)
         }
@@ -72,11 +72,17 @@ class ExtendedMenuActivity : AppCompatActivity() {
             eventsSelectedList = events
             if (switch1.isChecked or switch2.isChecked or switch3.isChecked) eventsSelectedList =
                     EventListSelector().select(switch1.isChecked, switch2.isChecked, switch3.isChecked, events)
-            if (city_choice_view.text.toString() != "") eventsSelectedList = EventListSelector().cityEventSearch(eventsSelectedList, choosenCity)
-            if (country_choice_view.text.toString() != "") eventsSelectedList = EventListSelector().countryEventSearch(eventsSelectedList, choosenCountry)
-            if(eventsSelectedList.size != 0){
-            srchActivityOpener(eventsSelectedList)}
-            else{
+            if (city_choice_view.text.toString() != "") {
+                if (choosenCity.size == 0) choosenCity = cityAndCountryTVSplit(city_choice_view.text.toString().trim())
+                eventsSelectedList = EventListSelector().cityEventSearch(eventsSelectedList, choosenCity)
+            }
+            if (country_choice_view.text.toString() != "") {
+                if (choosenCountry.size == 0) choosenCountry = cityAndCountryTVSplit(country_choice_view.text.toString().trim())
+                eventsSelectedList = EventListSelector().countryEventSearch(eventsSelectedList, choosenCountry)
+            }
+            if (eventsSelectedList.size != 0) {
+                srchActivityOpener(eventsSelectedList)
+            } else {
                 Toast.makeText(this, R.string.text_for_srch_btn, Toast.LENGTH_LONG).show()
             }
 
@@ -118,24 +124,33 @@ class ExtendedMenuActivity : AppCompatActivity() {
         }
     }
 
-    fun cityAndCountryTVUpdater(){
+    fun cityAndCountryTVUpdater() {
         if (choosenCity.size != 0) {
             var cityList = ""
             if (choosenCity.size != 0) {
                 for (c in choosenCity) {
-                    cityList += "$c, "
+                    if (c != choosenCity.last()) {
+                        cityList += "$c, "
+                    } else cityList += c
                 }
                 city_choice_view.setText(cityList)
             }
-        }else city_choice_view.setText("")
+        } else city_choice_view.setText("")
         if (choosenCountry.size != 0) {
             var countryList = ""
             if (choosenCountry.size != 0) {
                 for (c in choosenCountry) {
-                    countryList += "$c, "
+                    if (c != choosenCountry.last()) {
+                        countryList += "$c, "
+                    } else countryList += c
                 }
                 country_choice_view.setText(countryList)
             }
-        }else country_choice_view.setText("")
+        } else country_choice_view.setText("")
+    }
+
+    fun cityAndCountryTVSplit(input: String): MutableList<String> {
+        val result: List<String> = input.split(", ").map { it.trim() }
+        return result as MutableList<String>
     }
 }
