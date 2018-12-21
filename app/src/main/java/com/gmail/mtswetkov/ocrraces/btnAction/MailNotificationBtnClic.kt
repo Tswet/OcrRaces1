@@ -30,13 +30,13 @@ class MailNotificationBtnClic {
             val input = EditText(context)
             input.setSingleLine()
             input.width = 1800
-            input.hint = "email@domen.com"
+            input.hint = "email@domain.com"
             dialLayout.addView(input)
-            dialLayout.setPadding(70, 0, 100, 0)
+            dialLayout.setPadding(45, 0, 36, 0)
             builder.setTitle(R.string.mail_title)
             builder.setMessage(R.string.mail_dialog_message)
             builder.setView(dialLayout)
-            builder.setPositiveButton("OK") { _, _ ->
+            builder.setPositiveButton("Подписаться") { _, _ ->
                 //dialog, wichButton
                 if (EmailValidator.isEmailValid(input.text.toString())) {
                     userEmail = input.text.toString().trim()
@@ -59,7 +59,7 @@ class MailNotificationBtnClic {
                     Toast.makeText(context, "Введите корректный email", Toast.LENGTH_LONG).show()
                 }
             }
-            builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() } //_ = which
+            builder.setNegativeButton("Отмена") { dialog, _ -> dialog.cancel() } //_ = which
             builder.create().show()
         } else {
             if (userEmailfromSP != "") userEmail = userEmailfromSP

@@ -47,6 +47,7 @@ open class SharedPrefWorker(context: Context) {
 
     fun setNotificationsList(notifList : MutableList<LocalNotification>){
         val jsonString: String = gson.toJson(notifList)
+        Log.d("notif__!", jsonString)
         editor.putString(ShowSingleRaceActivity.NOTIFICATION_OBJECTS, jsonString)
         editor.apply()
     }

@@ -1,6 +1,7 @@
 package com.gmail.mtswetkov.ocrraces
 
 import android.app.DialogFragment
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,13 @@ import kotlinx.android.synthetic.main.city_list_layout.view.*
 class CityAndCounryList : DialogFragment() {
 
     private var list: MutableList<String> = mutableListOf()
+    private var choosenList: MutableList<String> = mutableListOf()
+
+
+    override fun onCancel(dialog: DialogInterface?) {
+        super.onCancel(dialog)
+            ExtendedMenuActivity.mOnChange.setBoo(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container:
     ViewGroup?, savedInstanceState: Bundle?): View {
@@ -27,15 +35,23 @@ class CityAndCounryList : DialogFragment() {
             getString(R.string.chose_сity)
         } else getString(R.string.chose_country)
         title.text = titleText
-        list = if (mNum == 1) {
-            ExtendedMenuActivity.cities
-        } else ExtendedMenuActivity.countries
-        val choosenList: MutableList<String> = mutableListOf()
+
+        if (mNum == 1) {
+            list = ExtendedMenuActivity.cities
+            choosenList = ExtendedMenuActivity.choosenCity
+        } else {
+            list = ExtendedMenuActivity.countries
+            choosenList = ExtendedMenuActivity.choosenCountry
+        }
+
+
 
         list.sort()
         for (l in list) {
             val item = CheckBox(activity)
             item.text = l
+            if (ExtendedMenuActivity.choosenCity.contains(l)) item.isChecked = true
+            if (ExtendedMenuActivity.choosenCountry.contains(l)) item.isChecked = true
             item.setOnClickListener {
                 if (item.isChecked) {
                     choosenList.add(item.text.toString())

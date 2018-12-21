@@ -33,11 +33,18 @@ class SearchActivity : AppCompatActivity() {
 
     lateinit var singleEvent: Event
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed();
+        return true;
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_activity)
 
+        this.supportActionBar?.show()
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true);
 
         val b : Bundle = intent.extras
         val jsonString = b.getString(MainActivity.selected_list)

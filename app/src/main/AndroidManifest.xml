@@ -7,8 +7,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
+        android:name=".myApp"
         android:allowBackup="true"
         android:icon="@mipmap/ocr_icon"
         android:label="@string/app_name"
@@ -35,15 +37,16 @@
         <activity
             android:name=".CalendarActivity"
             android:screenOrientation="portrait"
-            android:label="@string/calendar_menu"/>/>
+            android:label="@string/calendar_menu"/>
         <activity
             android:name=".SearchActivity"
             android:screenOrientation="portrait"
-            android:label="@string/search_activity"/>/>
+            android:label="@string/search_activity"/>
         <activity
             android:name=".ExtendedMenuActivity"
             android:screenOrientation="portrait"
             android:label="@string/search"/>
+
 
         <service
             android:name=".NotificationsJobScheduler"

@@ -9,13 +9,11 @@
         android:id="@+id/eventIcon"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.061"
         app:srcCompat="@mipmap/ic_launcher"
         android:contentDescription="@string/event_picture" />
 
@@ -26,9 +24,12 @@
         android:layout_marginEnd="50dp"
         android:textStyle="bold"
         android:textSize="18sp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="@color/black"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/eventIcon"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,9 +38,9 @@
         android:id="@+id/eventDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="16dp"
         android:gravity="center"
         android:textColor="@color/darckRed"
         android:textSize="21sp"
@@ -52,6 +53,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="3sp"
+        android:layout_marginEnd="50dp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/eventName"
         app:layout_constraintTop_toBottomOf="@+id/eventName" />
 
@@ -59,7 +65,7 @@
         android:id="@+id/eventMounth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:gravity="end"
         android:textColor="@color/darckRed"
         android:textStyle="bold"
@@ -72,7 +78,7 @@
         android:id="@+id/eventImage"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toBottomOf="@+id/eventIcon"
         app:srcCompat="@mipmap/ic_launcher"
@@ -82,19 +88,19 @@
         android:id="@+id/eventShortDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8sp"
-        android:layout_marginTop="8sp"
-        android:paddingStart="5sp"
-        android:paddingEnd="10sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+
         android:maxLines="4"
+        android:ellipsize="end"
         android:minLines="1"
         app:layout_constraintTop_toBottomOf="@+id/eventImage" />
 
     <TextView
         android:layout_width="match_parent"
         android:id="@+id/viewSpase"
-        android:layout_height="10dp"
+        android:layout_height="2dp"
         app:layout_constraintTop_toBottomOf="@+id/eventShortDescription"/>
 
     <LinearLayout
@@ -102,13 +108,14 @@
         android:id="@+id/btmLayout"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="6sp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         app:layout_constraintTop_toBottomOf="@+id/viewSpase">
 
         <ImageButton
             android:id="@+id/favoritBtnMA"
             android:layout_width="30dp"
-            android:layout_height="26sp"
+            android:layout_height="26dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@drawable/starsm"
@@ -118,7 +125,7 @@
         <ImageButton
             android:id="@+id/notifBtnMA"
             android:layout_width="30dp"
-            android:layout_height="26sp"
+            android:layout_height="26dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@drawable/bellsm"
@@ -128,7 +135,7 @@
         <ImageButton
             android:id="@+id/mailNotifBtnMA"
             android:layout_width="30dp"
-            android:layout_height="26sp"
+            android:layout_height="26dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:scaleType="fitCenter"
@@ -136,9 +143,5 @@
             android:src="@drawable/emailsm"/>
 
     </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:id="@+id/viewSpase2"
-        android:layout_height="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/btmLayout"/>
+
 </android.support.constraint.ConstraintLayout>

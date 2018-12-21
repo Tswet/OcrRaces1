@@ -6,14 +6,19 @@
     <color name="trans">#80000000</color>
     <color name="white">#ffffff</color>
     <color name="darckBlue">#1b37ea</color>
-    <color name="lightBlue">#6bbff7</color>
+    <color name="lightBlue">#78beed</color>
     <color name="lightBlueLink">#54a9e2</color>
     <color name="lightGreen">#9211d743</color>
     <color name="darckRed">#f73134</color>
+    <color name="lightRed">#f19597</color>
+    <color name="blue_menu">#7587ec</color>
     <color name="transparent">#00ffffff</color>
     <color name="black">#000000</color>
     <color name="gray">#d5d5d9</color>
-    <color name="lightGray">#e5e5e6</color>
+    <color name="lightGray">#fcfdff</color>
+    <color name="about_white">#fffafafa</color>
+    <color name="about_white_ald">#f5f4f4</color>
     <color name="dark_gray">#8d8d8f</color>
     <color name="dark_gray_action_bar">#6d6d6e</color>
+    <color name="text_color_primary">#6d6d6e</color>
 </resources>

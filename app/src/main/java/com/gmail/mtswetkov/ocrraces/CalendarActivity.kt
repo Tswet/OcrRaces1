@@ -26,6 +26,7 @@ class CalendarActivity : AppCompatActivity() {
     private lateinit var event1: Event
     private lateinit var event2: Event
     private lateinit var event3: Event
+    private lateinit var event4: Event
     private var eventColor = 0
     private var favEventColor = 0
     private val myFormat = "M-d-yyyy"
@@ -35,9 +36,12 @@ class CalendarActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        favList = SharedPrefWorker(this).getFavoritrList()
-        Log.d("city", "onresume")
-        dateDecorator()
+        val tempfavList = SharedPrefWorker(this).getFavoritrList()
+        if(!favList.equals(tempfavList)){
+            favList = tempfavList
+            tempfavList.clear()
+            dateDecorator()
+        }
     }
 
 
@@ -45,24 +49,34 @@ class CalendarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.calendar_activity)
         eventColor = ContextCompat.getColor(this, R.color.lightBlue)
-        favEventColor = ContextCompat.getColor(this, R.color.lightGreen)
+        favEventColor = ContextCompat.getColor(this, R.color.lightRed)
+
+        this.supportActionBar?.hide()
+
+        val calendar = Calendar.getInstance()
+        calendarView.setDateSelected(calendar.getTime(), true)
+
 
         dateDecorator()
+
         calendarView.setOnDateChangedListener { _, date, _ ->
             race1_calendar.visibility = View.GONE
             race2_calendar.visibility = View.GONE
             race3_calendar.visibility = View.GONE
+            line3.visibility = View.GONE
+            line4.visibility = View.GONE
+            line5.visibility = View.GONE
             var iter = 0
             val clcDate = getString(R.string.date_fornat, (date.month + 1).toString(), date.day.toString(), date.year.toString())
             for (e in events) {
-                Log.d("ITER_", iter.toString())
                 if (clcDate == sdf.format(e.date)) {
                     if (iter == 0) {
                         event1 = e
                         Picasso.get().load(e.icon).resize(400, 400).transform(CircularTransformation(200)).into(icon_calendar_item1)
                         name_calendar_item1.text = e.name
-                        city_calendar_item1.text = e.contact?.city?.name
+                        city_calendar_item1.text = getString(R.string.event_location, e.contact!!.country!!.name, e.contact.city!!.name) //e.contact?.city?.name
                         race1_calendar.visibility = View.VISIBLE
+                        line3.visibility = View.VISIBLE
                         race1_calendar.setOnClickListener {
                             eventOpener(event1)
                         }
@@ -71,8 +85,9 @@ class CalendarActivity : AppCompatActivity() {
                         event2 = e
                         Picasso.get().load(e.icon).resize(400, 400).transform(CircularTransformation(200)).into(icon_calendar_item2)
                         name_calendar_item2.text = e.name
-                        city_calendar_item2.text = e.contact?.city?.name
+                        city_calendar_item2.text = getString(R.string.event_location, e.contact!!.country!!.name, e.contact.city!!.name)
                         race2_calendar.visibility = View.VISIBLE
+                        line4.visibility = View.VISIBLE
                         race2_calendar.setOnClickListener {
                             eventOpener(event2)
                         }
@@ -81,9 +96,20 @@ class CalendarActivity : AppCompatActivity() {
                         event3 = e
                         Picasso.get().load(e.icon).resize(400, 400).transform(CircularTransformation(200)).into(icon_calendar_item3)
                         name_calendar_item3.text = e.name
-                        city_calendar_item3.text = e.contact?.city?.name
+                        city_calendar_item3.text = getString(R.string.event_location, e.contact!!.country!!.name, e.contact.city!!.name)
                         race3_calendar.visibility = View.VISIBLE
+                        line5.visibility = View.VISIBLE
                         race3_calendar.setOnClickListener {
+                            eventOpener(event3)
+                        }
+                    }
+                    if (iter == 3) {
+                        event4 = e
+                        Picasso.get().load(e.icon).resize(400, 400).transform(CircularTransformation(200)).into(icon_calendar_item4)
+                        name_calendar_item4.text = e.name
+                        city_calendar_item4.text = getString(R.string.event_location, e.contact!!.country!!.name, e.contact.city!!.name)
+                        race4_calendar.visibility = View.VISIBLE
+                        race4_calendar.setOnClickListener {
                             eventOpener(event3)
                         }
                     }
@@ -102,7 +128,7 @@ class CalendarActivity : AppCompatActivity() {
     private fun dateDecorator() {
         events = SharedPrefWorker(this).getAllEventsList()
         favList = SharedPrefWorker(this).getFavoritrList()
-        var favDateControlList: MutableList<Date> = mutableListOf()
+        val favDateControlList: MutableList<Date> = mutableListOf()
         //Log.d("logevent", favList[1].toString())
 
         for (e in events) {

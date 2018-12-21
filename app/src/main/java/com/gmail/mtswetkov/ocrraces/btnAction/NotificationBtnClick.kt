@@ -7,9 +7,7 @@ import android.content.Context
 import android.graphics.Typeface
 import android.os.Build
 import android.support.v7.app.AlertDialog
-import android.util.Log
 import android.util.TypedValue
-import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -30,6 +28,9 @@ class NotificationBtnClick {
 
 
     fun click(event: Event, notifBtn: ImageView, context: Context, notList: MutableList<LocalNotification>, imageTipe: Int) {
+
+    /*    notifList= mutableListOf()
+        SharedPrefWorker(context).setNotificationsList(notifList)*/
 
         this.notifList = notList
         val temporaryDate: Date? = event.date
@@ -56,35 +57,29 @@ class NotificationBtnClick {
             val textLine1 = TextView(context)
             val textLine2 = TextView(context)
             val textLine3 = TextView(context)
-            val textLineLabel = TextView(context)
+           // val textLineLabel = TextView(context)
             val textLineMsg = TextView(context)
             textLine1.setSingleLine()
             textLine2.setSingleLine()
             textLine3.setSingleLine()
-            //textLineLabel.setText(R.string.notif_box_label)
-            textLineLabel.text = ""
+            //textLineLabel.text = ""
             textLineMsg.setText(R.string.notif_box_questeon)
             textLine1.setText(R.string.notif_line_1)
             textLine2.setText(R.string.notif_line_2)
             textLine3.setText(R.string.notif_line_3)
-            textLineLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP,18F)
-            textLineLabel.setTypeface(null, Typeface.BOLD)
-            textLineMsg.setTextSize(TypedValue.COMPLEX_UNIT_SP,18F)
+            textLineMsg.setTextSize(TypedValue.COMPLEX_UNIT_SP,14F)
+            /*textLineLabel.setTypeface(null, Typeface.BOLD)
+            textLineMsg.setTextSize(TypedValue.COMPLEX_UNIT_SP,18F)*/
             textLineMsg.setTypeface(null, Typeface.BOLD)
+            //dialLayout.addView(textLineMsg)
             //dialLayout.addView(textLineLabel)
-            dialLayout.addView(textLineMsg)
-            dialLayout.addView(textLineLabel)
             dialLayout.addView(textLine1)
             dialLayout.addView(textLine2)
             dialLayout.addView(textLine3)
-            textLineLabel.gravity = Gravity.CENTER_HORIZONTAL
-            textLineMsg.gravity = Gravity.CENTER_HORIZONTAL
-            textLine1.gravity = Gravity.CENTER_HORIZONTAL
-            textLine2.gravity = Gravity.CENTER_HORIZONTAL
-            textLine3.gravity = Gravity.CENTER_HORIZONTAL
-            dialLayout.setPadding(30, 100, 100, 0)
+            dialLayout.setPadding(45, 20, 100, 0)
             builder.setView(dialLayout)
-            builder.setPositiveButton("OK") { _, _ ->
+            builder.setTitle(R.string.notif_box_questeon)
+            builder.setPositiveButton("Добавить") { _, _ ->
                 when (imageTipe) {
                     1 -> notifBtn.setImageResource(R.drawable.bellrsm)
                     2 -> notifBtn.setImageResource(R.drawable.bellr)
@@ -108,7 +103,7 @@ class NotificationBtnClick {
                         jobInfo = notifBuilder.build()
                         js = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
                         js.schedule(jobInfo)
-                        Log.d("JS_job", js.allPendingJobs[0].intervalMillis.toString())
+                        //Log.d("JS_job", js.allPendingJobs[0].intervalMillis.toString())
                     } else {
                         val notifBuilder: JobInfo.Builder = JobInfo.Builder(ShowSingleRaceActivity.JOB_ID, cn)
                                 .setPeriodic(24 * 60 * 60 * 1000)
@@ -121,7 +116,7 @@ class NotificationBtnClick {
                     NotificationsJobScheduler.started = true
                 }
             }
-            builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() } //_ = which
+            builder.setNegativeButton("Отмена") { dialog, _ -> dialog.cancel() } //_ = which
             builder.create().show()
         } else {
             when (imageTipe) {

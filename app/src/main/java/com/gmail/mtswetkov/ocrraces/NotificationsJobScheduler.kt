@@ -11,6 +11,7 @@ import android.os.Build
 import android.text.format.DateFormat
 import android.util.Log
 import com.gmail.mtswetkov.ocrraces.model.LocalNotification
+import com.gmail.mtswetkov.ocrraces.model.SharedPrefWorker
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*
@@ -18,7 +19,7 @@ import java.util.*
 class NotificationsJobScheduler : JobService() {
 
     private lateinit var mNotification: Notification
-    private lateinit var alarmIntent: PendingIntent
+    //private lateinit var alarmIntent: PendingIntent
     private lateinit var prefs: SharedPreferences
     val gson = Gson()
     private var notificationManager: NotificationManager? = null
@@ -35,6 +36,7 @@ class NotificationsJobScheduler : JobService() {
     }
 
     override fun onStopJob(params: JobParameters?): Boolean {
+        Log.d("JSON_today", "stopped")
         return false
     }
 
@@ -42,51 +44,68 @@ class NotificationsJobScheduler : JobService() {
         Log.d("JSON_today", "started")
         sendNotification()
         jobFinished(params, false)
-        return true
+        return false
     }
 
     private fun sendNotification() {
-        val intent = Intent(this, MainActivity::class.java)
+        //val intent = Intent(this, MainActivity::class.java)
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        alarmIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-
+        //val intent = Intent(this, ShowSingleRaceActivity::class.java)
         //Get Notification list from SharedPreferences
         prefs = this.getSharedPreferences(ShowSingleRaceActivity().PREFS_FILENAME, 0)
         val jsonPerf: String = prefs.getString(ShowSingleRaceActivity().NOTIFICATION_OBJECTS, "")
         if (jsonPerf != "") notifList = gson.fromJson(jsonPerf, object : TypeToken<MutableList<LocalNotification>>() {}.type)
 
+
         //Check the date
         val today = DateFormat.format("yyyy-MM-dd", Calendar.getInstance())
+
         for (notif in notifList) {
+            val rId: Int = notif.raceId
+            val events = SharedPrefWorker(this).getAllEventsList()
+
             val raceday = DateFormat.format("yyyy-MM-dd", notif.notifDate)
             if (today.toString() == raceday.toString()) {
-                createNotificationChannel(
-                        CHANNEL_ID,
-                        CHANNEL_NAME,
-                        CHANNEL_DISC)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    mNotification = Notification.Builder(this, CHANNEL_ID)
-                            .setSmallIcon(R.drawable.bellr)
-                            .setContentTitle(notif.raceName)
-                            .setContentText(notif.message)
-                            .setContentIntent(alarmIntent)
-                            .setAutoCancel(true)
-                            .build()
-                    notificationID++
-                } else {
-                    mNotification = Notification.Builder(this)
-                            .setSmallIcon(R.drawable.bellr)
-                            .setAutoCancel(true)
-                            .setContentTitle(notif.raceName)
-                            .setContentText(notif.message)
-                            .setContentIntent(alarmIntent)
-                            .setAutoCancel(true)
-                            .build()
+                for (e in events) {
+                    if (rId == e.id) {
+                        val intent = Intent(this, ShowSingleRaceActivity::class.java)
+                        intent.putExtra("SHOW_RACE", e)
+                        intent.setAction(notificationID.toString())
+                        val alarmIntent = PendingIntent.getActivity(this, notificationID, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+                        createNotificationChannel(
+                                CHANNEL_ID,
+                                CHANNEL_NAME,
+                                CHANNEL_DISC)
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            mNotification = Notification.Builder(this, CHANNEL_ID)
+                                    .setSmallIcon(R.drawable.bellr)
+                                    .setContentTitle(notif.raceName)
+                                    .setContentText(notif.message)
+                                    .setContentIntent(alarmIntent)
+                                    .setAutoCancel(true)
+                                    .build()
+                            Log.d("Notif__Intt", mNotification.toString())
+                            notificationID++
+                        } else {
+                            mNotification = Notification.Builder(this)
+                                    .setSmallIcon(R.drawable.bellr)
+                                    .setAutoCancel(true)
+                                    .setContentTitle(notif.raceName)
+                                    .setContentText(notif.message)
+                                    .setContentIntent(alarmIntent)
+                                    .setAutoCancel(true)
+                                    .build()
+                            notificationID++
+                        }
+                        notificationManager?.notify(notificationID, mNotification)
+                    }
                 }
-                notificationManager?.notify(notificationID, mNotification)
             }
         }
     }
+
 
     private fun createNotificationChannel(id: String, name: String,
                                           description: String) {

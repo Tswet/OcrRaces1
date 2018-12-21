@@ -12,6 +12,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
 import android.net.ConnectivityManager
+import android.support.design.widget.BottomNavigationView
 import android.support.v4.widget.SwipeRefreshLayout
 import android.text.format.DateFormat
 import android.text.format.DateFormat.*
@@ -29,6 +30,36 @@ import com.google.gson.Gson
 
 
 class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
+
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.favoriteMenu -> {
+                eventsSelectedList = EventListSelector().select(true, false, false, events)
+                if (eventsSelectedList.size != 0) {
+                    val i = Intent(this@MainActivity, SearchActivity::class.java)
+                    val jsonString = Gson().toJson(eventsSelectedList)
+                    i.putExtra("Selected_List", jsonString)
+                    startActivity(i)
+                }
+            }
+            R.id.extMenu -> {
+                eventsSelectedList = mutableListOf()
+                SharedPrefWorker(this@MainActivity).setAllEventsList(events)
+                //val i = Intent(this, ExtendedMenuActivity::class.java)
+                val i = Intent(this@MainActivity, ExtendedMenuActivity::class.java)
+                startActivity(i)
+                Log.d("menuuuu", "extMenu")
+            }
+            R.id.calendarMenu -> {
+                eventsSelectedList = mutableListOf()
+                SharedPrefWorker(this@MainActivity).setAllEventsList(events)
+                val i = Intent(this@MainActivity, CalendarActivity::class.java)
+                startActivity(i)
+                Log.d("menuuuu", "calMenu")
+            }
+        }
+        false
+    }
 
     private lateinit var itemAdapter: EventAdapter
     private var events: MutableList<Event> = mutableListOf()
@@ -65,10 +96,17 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
         ma_swipe.setOnRefreshListener(this)
 
+        this.supportActionBar?.hide()
+
         itemAdapter = EventAdapter()
         race_list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         race_list.adapter = itemAdapter
         getDataDespatcher()
+
+        val navigation = findViewById<View>(R.id.navigation) as BottomNavigationView
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        navigation.getMenu().findItem(R.id.favoriteMenu).setChecked(false)
+
     }
 
     private fun getDataFromServer() {
@@ -93,6 +131,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             events = SharedPrefWorker(this).getAllEventsList()
             if (events.size > 0) {
                 itemAdapter.notifyDataSetChanged()
+                Toast.makeText(this, getString(R.string.noInternet_with_data), Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this, getString(R.string.noInternet), Toast.LENGTH_LONG).show()
             }
@@ -146,7 +185,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                 val day = format("d", event.date)
                 val mounth = DateFormat.format("MM", event.date)
                 eventDay?.text = day.toString()
-                eventMounth?.text = MonthNameFormater().formater(mounth.toString().toInt()-1)
+                eventMounth?.text = MonthNameFormater().formater(mounth.toString().toInt() - 1)
                 eventLocation?.text = getString(R.string.event_location, event.contact!!.country!!.name, event.contact.city!!.name)//"${event.contact!!.country!!.name} - ${event.contact.city!!.name}"
                 Picasso.get().load(event.icon).resize(400, 400).transform(CircularTransformation(200)).into(eventIcon)
                 Picasso.get().load(event.image).error(getDrawable(R.drawable.opanki)).into(eventImage)
@@ -178,9 +217,9 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
                 mailNotifBtnMA?.setOnClickListener {
                     val ml = SharedPrefWorker(this@MainActivity).getSubscribeList()
-                    for (event in events) {
+                    for (e in events) {
                         for (item in ml) {
-                            if (event.id == item.id) {
+                            if (e.id == item.id) {
                                 userMail = item.email
                             }
                         }
@@ -200,7 +239,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+/*    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.activity_main_drawer, menu)
         return true
@@ -212,11 +251,11 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             R.id.favoriteMenu ->
                 eventsSelectedList = EventListSelector().select(true, false, false, events)
 
-/*            R.id.notificationMenu ->
+*//*            R.id.notificationMenu ->
                 eventsSelectedList = EventListSelector().select(false, true, false, events)
 
             R.id.mailMenu ->
-                eventsSelectedList = EventListSelector().select(false, false, true, events)*/
+                eventsSelectedList = EventListSelector().select(false, false, true, events)*//*
 
             R.id.extMenu -> {
                 eventsSelectedList = mutableListOf()
@@ -239,7 +278,8 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         }
 
         return super.onOptionsItemSelected(item)
-    }
+    }*/
+
 
     fun btnPicReplacer() {
         val spW = SharedPrefWorker(this)

@@ -4,6 +4,8 @@ package com.gmail.mtswetkov.ocrraces
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.extended_menu_activity.*
 import com.gmail.mtswetkov.ocrraces.model.Event
 import com.gmail.mtswetkov.ocrraces.model.SharedPrefWorker
@@ -31,15 +33,24 @@ class ExtendedMenuActivity : AppCompatActivity() {
         cityAndCountryTVUpdater()
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onBackPressed() {
+        super.onBackPressed()
         choosenCountry = mutableListOf()
         choosenCity = mutableListOf()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed();
+        return true;
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.extended_menu_activity)
+
+        //this.supportActionBar?.hide()
+        this.supportActionBar?.show()
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true);
 
         events = SharedPrefWorker(this).getAllEventsList()
 
@@ -89,12 +100,10 @@ class ExtendedMenuActivity : AppCompatActivity() {
         }
 
         searchCityListBtn.setOnClickListener {
-            choosenCity = mutableListOf()
             getLocationCityOrCountry(1)
         }
 
         searchCountryListBtn.setOnClickListener {
-            choosenCountry = mutableListOf()
             getLocationCityOrCountry(2)
         }
 
@@ -152,5 +161,31 @@ class ExtendedMenuActivity : AppCompatActivity() {
     fun cityAndCountryTVSplit(input: String): MutableList<String> {
         val result: List<String> = input.split(", ").map { it.trim() }
         return result as MutableList<String>
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.extended_activity, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.clearBtn -> {
+                choosenCountry = mutableListOf()
+                choosenCity = mutableListOf()
+                switch1.isChecked = false
+                switch2.isChecked = false
+                switch3.isChecked = false
+                country_choice_view.setText("")
+                city_choice_view.setText("")
+            }
+
+
+        }
+
+
+        return super.onOptionsItemSelected(item)
     }
 }
