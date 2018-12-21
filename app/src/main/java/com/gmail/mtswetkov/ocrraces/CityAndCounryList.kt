@@ -1,8 +1,9 @@
 package com.gmail.mtswetkov.ocrraces
 
-import android.app.DialogFragment
+
 import android.content.DialogInterface
 import android.os.Bundle
+import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,12 +24,11 @@ class CityAndCounryList : DialogFragment() {
             ExtendedMenuActivity.mOnChange.setBoo(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container:
-    ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val myView = inflater!!.inflate(R.layout.city_list_layout
+        val myView = inflater.inflate(R.layout.city_list_layout
                 , container, false)
-        val mNum = arguments.getInt("num")
+        val mNum = arguments!!.getInt("num")
         val ll: LinearLayout = myView.city_country_list_layout
         val title: TextView = myView.cityOrCountyTitle
         val titleText = if (mNum == 1) {

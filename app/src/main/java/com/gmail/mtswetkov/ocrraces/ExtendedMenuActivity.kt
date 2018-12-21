@@ -117,7 +117,7 @@ class ExtendedMenuActivity : AppCompatActivity() {
     private fun getLocationCityOrCountry(num: Int) {
 
         val cityAndCounryList = CityAndCounryList()
-        val fm = this@ExtendedMenuActivity.fragmentManager
+        val fm = this@ExtendedMenuActivity.supportFragmentManager
         val args = Bundle()
         args.putInt("num", num)
         cityAndCounryList.arguments = args

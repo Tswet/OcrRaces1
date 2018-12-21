@@ -191,7 +191,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:textColor="@color/white"
-                android:textStyle="bold"
                 android:backgroundTintMode="src_over"
                 android:backgroundTint="@color/lightBlueLink"
                 android:text="@string/search_btn"

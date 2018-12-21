@@ -33,6 +33,8 @@
         android:id="@+id/confBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/lightBlueLink"
         android:paddingStart="15sp"
         android:paddingEnd="15sp"
         android:text="@string/confirmBtn"/>
