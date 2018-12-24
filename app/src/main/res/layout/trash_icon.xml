@@ -6,6 +6,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/trash"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        android:onClick="clearForm"/>
 
 </LinearLayout>

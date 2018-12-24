@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.extended_menu_activity.*
 import com.gmail.mtswetkov.ocrraces.model.Event
 import com.gmail.mtswetkov.ocrraces.model.SharedPrefWorker
@@ -169,23 +170,14 @@ class ExtendedMenuActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when (item.itemId) {
-            R.id.clearBtn -> {
-                choosenCountry = mutableListOf()
-                choosenCity = mutableListOf()
-                switch1.isChecked = false
-                switch2.isChecked = false
-                switch3.isChecked = false
-                country_choice_view.setText("")
-                city_choice_view.setText("")
-            }
-
-
-        }
-
-
-        return super.onOptionsItemSelected(item)
+    fun clearForm(view: View){
+        choosenCountry = mutableListOf()
+        choosenCity = mutableListOf()
+        switch1.isChecked = false
+        switch2.isChecked = false
+        switch3.isChecked = false
+        country_choice_view.setText("")
+        city_choice_view.setText("")
     }
+
 }

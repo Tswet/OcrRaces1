@@ -44,6 +44,11 @@ class CalendarActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed();
+        return true;
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +56,9 @@ class CalendarActivity : AppCompatActivity() {
         eventColor = ContextCompat.getColor(this, R.color.lightBlue)
         favEventColor = ContextCompat.getColor(this, R.color.lightRed)
 
-        this.supportActionBar?.hide()
+        //this.supportActionBar?.hide()
+        this.supportActionBar?.show()
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true);
 
         val calendar = Calendar.getInstance()
         calendarView.setDateSelected(calendar.getTime(), true)
