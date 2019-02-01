@@ -1,12 +1,11 @@
-package com.gmail.mtswetkov.ocrraces
+package com.gmail.mtswetkov.ocrraces.Utils
 
 import android.app.ActionBar
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.view.Gravity
-import android.view.MenuItem
-import android.widget.RelativeLayout.LayoutParams;
+import android.widget.RelativeLayout.LayoutParams
 import android.widget.RelativeLayout
 import android.widget.TextView
 

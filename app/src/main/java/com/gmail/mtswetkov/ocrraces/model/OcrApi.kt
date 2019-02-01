@@ -10,6 +10,7 @@ import retrofit2.http.Query
 
 
 interface OcrApi {
+
     @GET("api/v1/events")
     fun getEvents(@Query("token") token: String,
                   @Query("dbVer") dbVer: Int
@@ -32,13 +33,15 @@ interface OcrApi {
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("http://46.21.249.174:8080/")
+                    .baseUrl("https://sportcontest.ru/")
                     .build()
 
             return retrofit.create(OcrApi::class.java);
         }
     }
 }
+
+//val base_url = "http://46.21.249.174:8080/"
 
 //@GET("/wps/wcm/connect/rosstat_ts/yar/ru/races.json")
 /*    fun getEvents(

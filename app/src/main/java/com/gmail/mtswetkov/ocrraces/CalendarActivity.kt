@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
+import com.gmail.mtswetkov.ocrraces.Utils.CircularTransformation
+import com.gmail.mtswetkov.ocrraces.Utils.MyDotSpan
 import com.gmail.mtswetkov.ocrraces.model.Event
 import com.gmail.mtswetkov.ocrraces.model.SharedPrefWorker
 import com.squareup.picasso.Picasso
@@ -37,7 +39,7 @@ class CalendarActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         val tempfavList = SharedPrefWorker(this).getFavoritrList()
-        if(!favList.equals(tempfavList)){
+        if(favList != tempfavList){
             favList = tempfavList
             tempfavList.clear()
             dateDecorator()
@@ -45,8 +47,8 @@ class CalendarActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed();
-        return true;
+        onBackPressed()
+        return true
     }
 
 
@@ -58,10 +60,10 @@ class CalendarActivity : AppCompatActivity() {
 
         //this.supportActionBar?.hide()
         this.supportActionBar?.show()
-        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true);
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val calendar = Calendar.getInstance()
-        calendarView.setDateSelected(calendar.getTime(), true)
+        calendarView.setDateSelected(calendar.time, true)
 
 
         dateDecorator()
@@ -70,6 +72,7 @@ class CalendarActivity : AppCompatActivity() {
             race1_calendar.visibility = View.GONE
             race2_calendar.visibility = View.GONE
             race3_calendar.visibility = View.GONE
+            race4_calendar.visibility = View.GONE
             line3.visibility = View.GONE
             line4.visibility = View.GONE
             line5.visibility = View.GONE
@@ -117,7 +120,7 @@ class CalendarActivity : AppCompatActivity() {
                         city_calendar_item4.text = getString(R.string.event_location, e.contact!!.country!!.name, e.contact.city!!.name)
                         race4_calendar.visibility = View.VISIBLE
                         race4_calendar.setOnClickListener {
-                            eventOpener(event3)
+                            eventOpener(event4)
                         }
                     }
                     iter++

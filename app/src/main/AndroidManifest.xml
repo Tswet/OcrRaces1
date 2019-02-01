@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".myApp"
@@ -22,13 +22,25 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="sportcontest.ru"
+                    android:scheme="https"
+                    android:pathPrefix="/share"/>
             </intent-filter>
         </activity>
         <activity
@@ -36,16 +48,16 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".CalendarActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/calendar_menu"/>
+            android:label="@string/calendar_menu"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SearchActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/search_activity"/>
+            android:label="@string/search_activity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ExtendedMenuActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/search"/>
+            android:label="@string/search"
+            android:screenOrientation="portrait" />
 
 
         <service
@@ -53,5 +65,6 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
+
 
 </manifest>

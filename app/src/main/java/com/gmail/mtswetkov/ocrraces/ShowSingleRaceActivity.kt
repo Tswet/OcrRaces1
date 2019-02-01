@@ -28,7 +28,10 @@ import android.graphics.Color
 import android.net.Uri
 import android.text.format.DateFormat
 import android.util.TypedValue
+import android.view.Menu
 import android.view.MenuItem
+import com.gmail.mtswetkov.ocrraces.Utils.ActionBarModifier
+import com.gmail.mtswetkov.ocrraces.Utils.CircularTransformation
 import java.text.DecimalFormat
 
 
@@ -62,7 +65,9 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         event = Event()
     }
 
-    override fun onOptionsItemSelected( item : MenuItem): Boolean {
+
+    //обработка стрелки назад из-за кастомного аскшен бара
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         this.finish()
         return true
     }
@@ -87,7 +92,7 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         val notifBtn: ImageButton = findViewById(R.id.notifBtn)
         val mailNotifBtn: ImageButton = findViewById(R.id.mailNotifBtn)
 
-       // val jsonString: String = gson.toJson(event.contact)
+        // val jsonString: String = gson.toJson(event.contact)
         //Log.d("events_LIST", jsonString)
 
         if (event.contact?.coordinate == null)
@@ -148,7 +153,7 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
             blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 8f)
             labelTextView.setPadding(0, 6, 0, 0)
             labelTextView.setTextColor(Color.BLACK)
-            labelTextView.text =  getString(R.string.format_part, f.participationFormat!!.name)
+            labelTextView.text = getString(R.string.format_part, f.participationFormat!!.name)
             discTextViev.text = f.participationFormat.shortDescription
             blankTextView.text = getString(R.string.blank)
             partLL.addView(labelTextView)
@@ -194,7 +199,7 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
             blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 8f)
             textView.text = getString(R.string.priceOne, p.amount.toInt().toString(), p.currency!!.name)
 
-            textView1.text = getString(R.string.priceTwo, p.participationFormat!!.name, p.shortDescription )
+            textView1.text = getString(R.string.priceTwo, p.participationFormat!!.name, p.shortDescription)
             priceLL.addView(textView)
             priceLL.addView(textView1)
             priceLL.addView(blankTextView)
@@ -245,9 +250,9 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
             }
         }
 
-        //raceDate.text = events!!.date.toString()
-        Picasso.get().load(event.icon).resize(400, 400).transform(CircularTransformation(200)).into(rIcon)
-        Picasso.get().load(event.image).into(rImage)
+        //Картинка и иконка
+        Picasso.get().load(event.icon).error(R.drawable.opanki1).resize(400, 400).transform(CircularTransformation(200)).into(rIcon)
+        Picasso.get().load(event.image).error(R.drawable.opanki).into(rImage)
 
         //Map Section
         val mapWrapper: ImageView = findViewById(R.id.transparent_image)
@@ -303,6 +308,21 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
     }
 
     override fun onMarkerClick(p0: Marker?) = false
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.single_race_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    fun shareEvent(item: MenuItem) {
+        val link: String = getString(R.string.shareUrlLink, event.id)
+        val title: String = getString(R.string.share)
+        val mShareIntent = Intent(Intent.ACTION_SEND)
+        mShareIntent.setType("text/plain")
+        mShareIntent.putExtra(Intent.EXTRA_TEXT, link)
+        startActivity(Intent.createChooser(mShareIntent, title))
+    }
 
 }
 

@@ -1,4 +1,4 @@
-package com.gmail.mtswetkov.ocrraces
+package com.gmail.mtswetkov.ocrraces.Utils
 
 class ValueChangeListener {
     private var boo = false

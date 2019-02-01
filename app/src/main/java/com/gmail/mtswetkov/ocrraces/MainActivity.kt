@@ -22,6 +22,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.gmail.mtswetkov.ocrraces.Utils.CircularTransformation
+import com.gmail.mtswetkov.ocrraces.Utils.MonthNameFormater
+import com.gmail.mtswetkov.ocrraces.Utils.SharingReceiverLinkDispatcher
 import com.gmail.mtswetkov.ocrraces.btnAction.FavoritBtnClick
 import com.gmail.mtswetkov.ocrraces.btnAction.MailNotificationBtnClic
 import com.gmail.mtswetkov.ocrraces.btnAction.NotificationBtnClick
@@ -67,6 +70,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     var singleEvent: Event = Event()
     private val repository = SearchRepositoryProvider.provideSearchRepository()
     private var userMail: String = ""
+    private var raceId: Int = 0
 
 
     companion object {
@@ -96,6 +100,18 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
         ma_swipe.setOnRefreshListener(this)
 
+        //обработка перехвата ссылок с названием сайта
+        val intent = intent
+        val action = intent.action
+        val intData = intent.getDataString()
+        if (Intent.ACTION_VIEW.equals(action) && intData != null) {
+            if (intData.contains("event_id=")) {
+                raceId = SharingReceiverLinkDispatcher().linkProcess(intData)
+            } else {
+                Toast.makeText(this, getString(R.string.incored_shared_data_type), Toast.LENGTH_LONG).show()
+            }
+        }
+
         this.supportActionBar?.hide()
 
         itemAdapter = EventAdapter()
@@ -117,6 +133,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                     itemAdapter.setEvents(it)
                     SharedPrefWorker(this).setAllEventsList(events)
                     progress_bar.visibility = View.GONE
+                    if (raceId != 0) raceOpen(raceId, events)
                 }, {
                     println("Error++ " + it.message)
                 })
@@ -187,8 +204,8 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                 eventDay?.text = day.toString()
                 eventMounth?.text = MonthNameFormater().formater(mounth.toString().toInt() - 1)
                 eventLocation?.text = getString(R.string.event_location, event.contact!!.country!!.name, event.contact.city!!.name)//"${event.contact!!.country!!.name} - ${event.contact.city!!.name}"
-                Picasso.get().load(event.icon).resize(400, 400).transform(CircularTransformation(200)).into(eventIcon)
-                Picasso.get().load(event.image).error(getDrawable(R.drawable.opanki)).into(eventImage)
+                Picasso.get().load(event.icon).error(R.drawable.opanki1).resize(400, 400).transform(CircularTransformation(200)).into(eventIcon)
+                Picasso.get().load(event.image).error(R.drawable.opanki).into(eventImage)
                 btnPicReplacer()
                 if (event.favourite) {
                     favoritBtnMA?.setImageResource(R.drawable.starrsm)
@@ -232,11 +249,30 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             override fun onClick(v: View?) {
                 val pos: Int = this.layoutPosition //this.position
                 singleEvent = events[pos]
-                val i = Intent(this@MainActivity, ShowSingleRaceActivity::class.java)
-                i.putExtra("SHOW_RACE", singleEvent)
-                startActivity(i)
+                activituOpen(singleEvent)
             }
         }
+    }
+
+    private fun raceOpen(id: Int, eList: MutableList<Event>) {
+
+        for (e in eList) {
+            if (e.id == id) {
+                singleEvent = e
+            }
+        }
+        raceId = 0
+        if (singleEvent.id != 0) {
+            activituOpen(singleEvent)
+        }else {
+            Toast.makeText(this, getString(R.string.incored_shared_data), Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun activituOpen(singleEvent: Event) {
+        val i = Intent(this@MainActivity, ShowSingleRaceActivity::class.java)
+        i.putExtra("SHOW_RACE", singleEvent)
+        startActivity(i)
     }
 
 /*    override fun onCreateOptionsMenu(menu: Menu): Boolean {

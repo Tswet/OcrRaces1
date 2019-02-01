@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Sport Contest</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDg-RPM3-xvpCTGkjvlaHIySWq7kRtwUg0</string>
+    <string name="google_maps_key1" templateMergeStrategy="preserve" translatable="false">AIzaSyDg-RPM3-xvpCTGkjvlaHIySWq7kRtwUg0</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCo149G1ZODae7POyiypbVJdsqzI3EeveE</string>
     <string name="notification_channel_description">later</string>
     <string name="Country"> Страна: </string>
     <string name="Country_ru">Страна</string>
@@ -39,6 +40,8 @@
     <string name="event_location">%1$s - %2$s</string>
     <string name="noInternet">Нет интернет соединения</string>
     <string name="noInternet_with_data">Нет соединения. Вы просматриваете ранее сохраненные  данные</string>
+    <string name="incored_shared_data_type">Данный тип ссылки не может быть обработан</string>
+    <string name="incored_shared_data">Мероприятие отсутствует в списке</string>
     <string name="format_participiaton">Формат участия</string>
     <string name="format_part_kids">&#8226; Детский</string>
     <string name="format_part_one">&#8226; Индивидуальный</string>
@@ -85,6 +88,8 @@
     <string name="clear_btn">Сброс</string>
     <string name="save_btn">Сохранить</string>
     <string name="event_price_info">У некоторых организаторов цена билета увеличивается по мере приближения старта. Стоимость на день покупки уточняйте на официальном сайте (см. раздел \"контакты\").</string>
-
+    <string name="site_host">*sportcontest.ru</string>
+    <string name="share">Поделиться</string>
+    <string name="shareUrlLink">https://sportcontest.ru/share?event_id=%1$s</string>
 
 </resources>

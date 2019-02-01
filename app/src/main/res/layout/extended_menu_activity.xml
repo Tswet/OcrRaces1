@@ -119,7 +119,8 @@
                 android:layout_weight="1"
                 android:dropDownAnchor="@id/switch2"
                 android:hint="@string/search_hint"
-                android:singleLine="true" />
+                android:singleLine="true"
+                />
 
             <ImageButton
                 android:id="@+id/searchCountryListBtn"

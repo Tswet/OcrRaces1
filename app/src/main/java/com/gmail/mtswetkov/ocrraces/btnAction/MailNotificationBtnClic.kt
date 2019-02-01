@@ -6,7 +6,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
-import com.gmail.mtswetkov.ocrraces.EmailValidator
+import com.gmail.mtswetkov.ocrraces.Utils.EmailValidator
 import com.gmail.mtswetkov.ocrraces.R
 import com.gmail.mtswetkov.ocrraces.ShowSingleRaceActivity
 import com.gmail.mtswetkov.ocrraces.model.Event

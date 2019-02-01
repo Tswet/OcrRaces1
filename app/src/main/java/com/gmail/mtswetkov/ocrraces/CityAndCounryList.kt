@@ -4,6 +4,7 @@ package com.gmail.mtswetkov.ocrraces
 import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,6 +70,7 @@ class CityAndCounryList : DialogFragment() {
         val confBtn = myView.confBtn
         confBtn.setOnClickListener {
             if (mNum == 1) {
+                Log.d("city_size", choosenList.size.toString())
                 ExtendedMenuActivity.choosenCity = choosenList
             } else {
                 ExtendedMenuActivity.choosenCountry = choosenList
