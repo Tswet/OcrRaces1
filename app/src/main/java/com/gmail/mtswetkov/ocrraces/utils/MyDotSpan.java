@@ -1,8 +1,8 @@
-package com.gmail.mtswetkov.ocrraces.Utils;
+package com.gmail.mtswetkov.ocrraces.utils;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
+
 import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 
 public class MyDotSpan extends DotSpan {

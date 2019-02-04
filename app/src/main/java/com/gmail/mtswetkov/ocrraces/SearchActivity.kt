@@ -15,8 +15,8 @@ import android.view.*
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import com.gmail.mtswetkov.ocrraces.Utils.CircularTransformation
-import com.gmail.mtswetkov.ocrraces.Utils.MonthNameFormater
+import com.gmail.mtswetkov.ocrraces.utils.CircularTransformation
+import com.gmail.mtswetkov.ocrraces.utils.MonthNameFormater
 import com.gmail.mtswetkov.ocrraces.btnAction.FavoritBtnClick
 import com.gmail.mtswetkov.ocrraces.btnAction.MailNotificationBtnClic
 import com.gmail.mtswetkov.ocrraces.btnAction.NotificationBtnClick

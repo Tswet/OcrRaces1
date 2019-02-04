@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
-import com.gmail.mtswetkov.ocrraces.Utils.CircularTransformation
-import com.gmail.mtswetkov.ocrraces.Utils.MyDotSpan
+import com.gmail.mtswetkov.ocrraces.utils.CircularTransformation
+import com.gmail.mtswetkov.ocrraces.utils.MyDotSpan
 import com.gmail.mtswetkov.ocrraces.model.Event
 import com.gmail.mtswetkov.ocrraces.model.SharedPrefWorker
 import com.squareup.picasso.Picasso
@@ -29,6 +29,10 @@ class CalendarActivity : AppCompatActivity() {
     private lateinit var event2: Event
     private lateinit var event3: Event
     private lateinit var event4: Event
+    private lateinit var event5: Event
+    private lateinit var event6: Event
+    private lateinit var event7: Event
+    private lateinit var event8: Event
     private var eventColor = 0
     private var favEventColor = 0
     private val myFormat = "M-d-yyyy"
@@ -73,9 +77,16 @@ class CalendarActivity : AppCompatActivity() {
             race2_calendar.visibility = View.GONE
             race3_calendar.visibility = View.GONE
             race4_calendar.visibility = View.GONE
+            race5_calendar.visibility = View.GONE
+            race6_calendar.visibility = View.GONE
+            race7_calendar.visibility = View.GONE
+            race8_calendar.visibility = View.GONE
             line3.visibility = View.GONE
             line4.visibility = View.GONE
             line5.visibility = View.GONE
+            line6.visibility = View.GONE
+            line7.visibility = View.GONE
+            line8.visibility = View.GONE
             var iter = 0
             val clcDate = getString(R.string.date_fornat, (date.month + 1).toString(), date.day.toString(), date.year.toString())
             for (e in events) {
@@ -119,8 +130,52 @@ class CalendarActivity : AppCompatActivity() {
                         name_calendar_item4.text = e.name
                         city_calendar_item4.text = getString(R.string.event_location, e.contact!!.country!!.name, e.contact.city!!.name)
                         race4_calendar.visibility = View.VISIBLE
+                        line6.visibility = View.VISIBLE
                         race4_calendar.setOnClickListener {
                             eventOpener(event4)
+                        }
+                    }
+                    if (iter == 4) {
+                        event5 = e
+                        Picasso.get().load(e.icon).resize(400, 400).transform(CircularTransformation(200)).into(icon_calendar_item5)
+                        name_calendar_item5.text = e.name
+                        city_calendar_item5.text = getString(R.string.event_location, e.contact!!.country!!.name, e.contact.city!!.name)
+                        race5_calendar.visibility = View.VISIBLE
+                        line7.visibility = View.VISIBLE
+                        race5_calendar.setOnClickListener {
+                            eventOpener(event5)
+                        }
+                    }
+                    if (iter == 5) {
+                        event6 = e
+                        Picasso.get().load(e.icon).resize(400, 400).transform(CircularTransformation(200)).into(icon_calendar_item6)
+                        name_calendar_item6.text = e.name
+                        city_calendar_item6.text = getString(R.string.event_location, e.contact!!.country!!.name, e.contact.city!!.name)
+                        race6_calendar.visibility = View.VISIBLE
+                        line8.visibility = View.VISIBLE
+                        race6_calendar.setOnClickListener {
+                            eventOpener(event6)
+                        }
+                    }
+                    if (iter == 6) {
+                        event7 = e
+                        Picasso.get().load(e.icon).resize(400, 400).transform(CircularTransformation(200)).into(icon_calendar_item7)
+                        name_calendar_item7.text = e.name
+                        city_calendar_item7.text = getString(R.string.event_location, e.contact!!.country!!.name, e.contact.city!!.name)
+                        race7_calendar.visibility = View.VISIBLE
+                        line9.visibility = View.VISIBLE
+                        race7_calendar.setOnClickListener {
+                            eventOpener(event7)
+                        }
+                    }
+                    if (iter == 7) {
+                        event8 = e
+                        Picasso.get().load(e.icon).resize(400, 400).transform(CircularTransformation(200)).into(icon_calendar_item8)
+                        name_calendar_item8.text = e.name
+                        city_calendar_item8.text = getString(R.string.event_location, e.contact!!.country!!.name, e.contact.city!!.name)
+                        race8_calendar.visibility = View.VISIBLE
+                        race8_calendar.setOnClickListener {
+                            eventOpener(event8)
                         }
                     }
                     iter++

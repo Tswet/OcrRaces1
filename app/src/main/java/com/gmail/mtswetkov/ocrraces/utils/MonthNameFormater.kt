@@ -1,4 +1,4 @@
-package com.gmail.mtswetkov.ocrraces.Utils
+package com.gmail.mtswetkov.ocrraces.utils
 
 class MonthNameFormater{
 

@@ -1,4 +1,4 @@
-package com.gmail.mtswetkov.ocrraces.Utils
+package com.gmail.mtswetkov.ocrraces.utils
 
 import android.app.ActionBar
 import android.content.Context

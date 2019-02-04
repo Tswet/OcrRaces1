@@ -30,8 +30,8 @@ import android.text.format.DateFormat
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
-import com.gmail.mtswetkov.ocrraces.Utils.ActionBarModifier
-import com.gmail.mtswetkov.ocrraces.Utils.CircularTransformation
+import com.gmail.mtswetkov.ocrraces.utils.ActionBarModifier
+import com.gmail.mtswetkov.ocrraces.utils.CircularTransformation
 import java.text.DecimalFormat
 
 
@@ -83,7 +83,7 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         rType.text = event.eventType!!.name
         eventShortDescription.text = event.fullDescription
 
-        val day = DateFormat.format("dd", event.date)
+            val day = DateFormat.format("dd", event.date)
         val year = DateFormat.format("yy", event.date)
         val mounth = DateFormat.format("MM", event.date)
 
@@ -321,6 +321,7 @@ class ShowSingleRaceActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         val mShareIntent = Intent(Intent.ACTION_SEND)
         mShareIntent.setType("text/plain")
         mShareIntent.putExtra(Intent.EXTRA_TEXT, link)
+        //mShareIntent.putExtra(Intent.EXTRA_TEXT, LinkTransformer().codLink(link))
         startActivity(Intent.createChooser(mShareIntent, title))
     }
 

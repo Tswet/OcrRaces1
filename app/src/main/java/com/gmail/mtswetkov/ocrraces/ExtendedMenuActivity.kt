@@ -12,7 +12,7 @@ import com.gmail.mtswetkov.ocrraces.model.Event
 import com.gmail.mtswetkov.ocrraces.model.SharedPrefWorker
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import com.gmail.mtswetkov.ocrraces.Utils.ValueChangeListener
+import com.gmail.mtswetkov.ocrraces.utils.ValueChangeListener
 import com.google.gson.Gson
 
 

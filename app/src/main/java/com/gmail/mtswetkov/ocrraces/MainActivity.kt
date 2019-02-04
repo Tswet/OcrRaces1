@@ -22,9 +22,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.gmail.mtswetkov.ocrraces.Utils.CircularTransformation
-import com.gmail.mtswetkov.ocrraces.Utils.MonthNameFormater
-import com.gmail.mtswetkov.ocrraces.Utils.SharingReceiverLinkDispatcher
+import com.gmail.mtswetkov.ocrraces.utils.CircularTransformation
+import com.gmail.mtswetkov.ocrraces.utils.MonthNameFormater
+import com.gmail.mtswetkov.ocrraces.utils.SharingReceiverLinkDispatcher
 import com.gmail.mtswetkov.ocrraces.btnAction.FavoritBtnClick
 import com.gmail.mtswetkov.ocrraces.btnAction.MailNotificationBtnClic
 import com.gmail.mtswetkov.ocrraces.btnAction.NotificationBtnClick
@@ -99,6 +99,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         setContentView(R.layout.activity_main)
 
         ma_swipe.setOnRefreshListener(this)
+
 
         //обработка перехвата ссылок с названием сайта
         val intent = intent
